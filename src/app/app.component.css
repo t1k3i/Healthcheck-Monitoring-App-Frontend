@@ -7,7 +7,7 @@ header {
 }
 
 .btn-login {
-font-weight: bold;
+    font-weight: bold;
 }
 
 .main-content {
@@ -20,6 +20,23 @@ font-weight: bold;
 .input-group {
     width: 100%;
     max-width: 400px;
+}
+
+.search-urls {
+    background-color: #eeeeee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.add-urls {
+    background-color: #eeeeee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-color: #1e1bcc;
+    color:rgb(0, 0, 10);
+    margin-right: 0;
+}
+
+.input-group-append {
+    margin-right: 0%;
 }
 
 .card {
@@ -81,22 +98,14 @@ font-weight: bold;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.my-form {
-    max-width: 100%;
-}
-
 .form-control:focus {
-    box-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     outline: none;
     border-color: #ccc; /* Optional: Change the border color */
 }
 
 .modal-body {
     padding: 0px;
-}
-
-.my-form {
-    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
 }
 
 .btn-close {
@@ -115,14 +124,12 @@ font-weight: bold;
 }
 
 .my-form {
+    max-width: 100%;
+    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
     padding: 2rem;
     max-width: 100%;
     color: #fff;
     box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
-    @media (max-width: 576px) {
-        max-width: 90%;
-        margin: 0px auto;
-    }
 }
 
 .login-form {

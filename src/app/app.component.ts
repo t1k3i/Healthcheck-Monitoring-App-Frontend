@@ -1,37 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UrlinfoGet } from './models/urlInfoGet';
 import { UrlinfoService } from './urlinfo.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
 
   title = 'healthcheck-app';
 
-  public urlinfos: UrlinfoGet[] = [];
-
+  urlinfos =  this.urlinfoService.getUrlInfos();
   constructor(private urlinfoService: UrlinfoService) {}
-
-  ngOnInit(): void {
-    this.getUrlinfos();
-  }
-
-  public getUrlinfos(): void {
-    this.urlinfoService.getUrlInfos().subscribe(
-      (response: UrlinfoGet[]) => {
-        this.urlinfos = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    )
-  }
 
 }
