@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UrlinfoGet } from './urlinfoget';
+import { UrlinfoGet } from './models/urlInfoGet';
 import { UrlinfoService } from './urlinfo.service';
 import { HttpErrorResponse } from '@angular/common/http';
 

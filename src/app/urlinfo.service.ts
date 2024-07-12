@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UrlinfoGet } from './urlinfoget';
-import { UrlinfoAdd } from './urlinfoadd';
-import { UrlinfoUpdate } from './urlinfoupdate';
-import { EmailAdd } from './emailadd';
+import { UrlinfoGet } from './models/urlInfoGet';
+import { UrlinfoAdd } from './models/urlInfoAdd';
+import { UrlinfoUpdate } from './models/urlInfoUpdate';
+import { EmailAdd } from './models/emailAdd';
 
 @Injectable({
   providedIn: 'root'
