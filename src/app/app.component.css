@@ -1,0 +1,161 @@
+header {
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.btn-login {
+font-weight: bold;
+}
+
+.main-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.input-group {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    background-color: #eeeeee;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.card-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card-text a:hover {
+    text-decoration: underline;
+}
+
+.circle-div {
+    display: flex;
+    align-items: center;
+}
+
+.status-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: #ddd;
+    border: 2px solid #aaa;
+}
+
+.healthy {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.unhealthy {
+    background-color: #e73e38;
+    color: #fff;
+}
+
+.edit-div {
+    display: flex;
+    align-items: center;
+}
+
+.shad {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.my-form {
+    max-width: 100%;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: #ccc; /* Optional: Change the border color */
+}
+
+.modal-body {
+    padding: 0px;
+}
+
+.my-form {
+    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
+}
+
+.btn-close {
+    position: absolute;
+    right: 0;
+    padding: 1rem;
+}
+
+.modal-content {
+    width: 80%;
+    margin: 0px auto;
+}
+
+.modal-body {
+    padding: 0px;
+}
+
+.my-form {
+    padding: 2rem;
+    max-width: 100%;
+    color: #fff;
+    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
+    @media (max-width: 576px) {
+        max-width: 90%;
+        margin: 0px auto;
+    }
+}
+
+.login-form {
+    background-color: inherit;
+    color: #fff;
+    padding-left: 0px;
+    border: 0px;
+    border-bottom: 1px solid #fff;
+}
+
+.my-form .btn {
+    width: 100%;
+    font-weight: 800;
+    background-color: #fff;
+    border-radius: 0;
+    padding: 0.5em 0;
+}
+
+.my-form .btn:hover {
+    color: #333;
+}
+
+.signup {
+    text-align: center;
+    padding-top: 2em;
+    color: grey;
+}
+
+.signup a {
+    color: #e1e1e1;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    color: #fff;
+}
