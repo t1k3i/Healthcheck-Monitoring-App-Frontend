@@ -1,3 +1,5 @@
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+
 header {
     margin-bottom: 20px;
 }
@@ -8,13 +10,6 @@ header {
 
 .btn-login {
     font-weight: bold;
-}
-
-.main-content {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    padding: 20px;
 }
 
 .input-group {
@@ -30,7 +25,7 @@ header {
 .add-urls {
     background-color: #eeeeee;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    border-color: #1e1bcc;
+    border: none;
     color:rgb(0, 0, 10);
     margin-right: 0;
 }
@@ -63,6 +58,11 @@ header {
 
 .card-text a:hover {
     text-decoration: underline;
+}
+
+.btn-group-sm {
+    display: flex;
+    justify-content: right;
 }
 
 .circle-div {
@@ -101,7 +101,7 @@ header {
 .form-control:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     outline: none;
-    border-color: #ccc; /* Optional: Change the border color */
+    border-color: #ccc;
 }
 
 .modal-body {
@@ -117,10 +117,6 @@ header {
 .modal-content {
     width: 80%;
     margin: 0px auto;
-}
-
-.modal-body {
-    padding: 0px;
 }
 
 .my-form {
@@ -164,5 +160,91 @@ header {
 }
 
 .signup a:hover {
+    color: #fff;
+}
+
+/* Add url modal */
+
+.modal-header {
+    color: white;
+    border-bottom: 1px solid #dee2e6;
+}
+  
+.modal-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.add-body, .edit-body {
+    padding: 2rem;
+}
+
+.form-group label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group label.required::after {
+    content: " *";
+    color: red;
+    margin-left: 5px;
+    font-weight: 700;
+}
+
+.add-form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.save-url {
+    border-radius: 0%;
+    border: none;
+    background-color: #343a40;
+}
+
+.save-url:hover {
+    background-color: #48505a; /* Slightly darker than the original background color */
+    color: #fff; /* Text color on hover remains the same */
+}
+
+.modal-content, .modal-body, .modal-header, .modal-footer {
+    border-radius: 0% !important;
+}
+
+.modal button {
+    border-radius: 0%;
+}
+
+.flex-grow-1 label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.edit-body button {
+    border: none;
+    background-color: #343a40;
+}
+
+.edit-body button:hover {
+    background-color: #48505a;
     color: #fff;
 }
