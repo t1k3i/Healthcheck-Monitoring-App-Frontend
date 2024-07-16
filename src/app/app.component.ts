@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UrlinfoService } from './urlinfo.service';
+import { UrlinfoService } from './services/urlinfo.service';
 import { CommonModule } from '@angular/common';
 import { UrlinfoGet } from './models/urlInfoGet';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService } from './services/authentication.service';
+import { UrlinfoAdd } from './models/urlInfoAdd';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +19,16 @@ export class AppComponent implements OnInit {
 
   title = 'healthcheck-app';
 
+  username = '';
+  password = '';
+
+  urlinfoAdd: UrlinfoAdd = {
+    url: '',
+    displayName: ''
+  };
+
   public urlinfos: UrlinfoGet[] = [];
-key: any;
-  constructor(private urlinfoService: UrlinfoService) {}
+  constructor(private urlinfoService: UrlinfoService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getUrlInfos();
@@ -48,6 +57,32 @@ key: any;
         alert(error.message);
       }
     )
+  }
+
+  public onLogin(): void {
+    this.authService.login(this.username, this.password).subscribe(
+      success => {
+        console.log('Login successful ');
+      },
+      error => {
+        console.error('Login failed', error);
+      }
+    );
+  }
+
+  public add(): void {
+    if (this.urlinfoAdd.url && this.urlinfoAdd.displayName) {
+      this.urlinfoService.addUrlInfo(this.urlinfoAdd).subscribe(
+        response => {
+          console.log('URL info added successfully', response);
+        },
+        error => {
+          console.error('Error adding URL info', error);
+        }
+      );
+    } else {
+      console.error('URL and description are required');
+    }
   }
 
 }

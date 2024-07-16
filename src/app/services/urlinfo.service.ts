@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UrlinfoGet } from './models/urlInfoGet';
-import { UrlinfoAdd } from './models/urlInfoAdd';
-import { UrlinfoUpdate } from './models/urlInfoUpdate';
-import { EmailAdd } from './models/emailAdd';
+import { UrlinfoGet } from '../models/urlInfoGet';
+import { UrlinfoAdd } from '../models/urlInfoAdd';
+import { UrlinfoUpdate } from '../models/urlInfoUpdate';
+import { EmailAdd } from '../models/emailAdd';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UrlinfoService {
 
-  private apiServer = 'http://localhost:8080';
+  apiServer = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
