@@ -1,0 +1,39 @@
+<!-- Modal Code (edit) -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
+        <button type="button" class="btn-close btn-close-white me-2" #closebutton data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        
+      <!-- Modal Body -->
+      <div class="modal-body edit-body">
+        <form id="add-item-form-update">
+         <div class="form-group">
+            <label for="item-name">Name</label>
+            <input type="text" class="form-control add-form-control" ngModel="{{urlInfo.displayName}}" [(ngModel)]="urlInfo.displayName" id="item-name-update" name="name">
+          </div>
+          <div class="form-group mt-2">
+            <label for="item-url">URL</label>
+            <input type="url" class="form-control add-form-control" id="item-url-update" ngModel="{{urlInfo.url}}" [(ngModel)]="urlInfo.url" name="url">
+          </div>
+        </form>
+        <div class="mb-3 d-flex flex-column align-items-center mt-3">
+          <button type="submit" class="btn btn-primary" (click)="update()">Save Changes</button>
+        </div>
+        <hr>
+          
+        <!-- Second Section: Add Email -->
+        <div class="mb-3 d-flex">
+          <div class="flex-grow-1 me-2">
+            <label for="edit-email" class="form-label">Add Email for Alerts</label>
+            <input type="email" class="form-control add-email" id="edit-email" name="edit-email" placeholder="Enter email">
+          </div>
+          <button type="submit" class="btn btn-secondary align-self-end">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

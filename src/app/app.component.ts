@@ -5,13 +5,16 @@ import { CommonModule } from '@angular/common';
 import { UrlinfoGet } from './models/urlInfoGet';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AuthenticationService } from './services/authentication.service';
-import { UrlinfoAdd } from './models/urlInfoAdd';
+import { LoginComponent } from "./modals/login/login.component";
+import { AddComponent } from "./modals/add/add.component";
+import { DeleteComponent } from "./modals/delete/delete.component";
+import { EditComponent } from "./modals/edit/edit.component";
+import { UrlinfoUpdate } from './models/urlInfoUpdate';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,16 +22,14 @@ export class AppComponent implements OnInit {
 
   title = 'healthcheck-app';
 
-  username = '';
-  password = '';
-
-  urlinfoAdd: UrlinfoAdd = {
-    url: '',
-    displayName: ''
-  };
-
   public urlinfos: UrlinfoGet[] = [];
-  constructor(private urlinfoService: UrlinfoService, private authService: AuthenticationService) {}
+  public idToDelete: number = -1;
+  public idToUpdate: number = -1;
+  public urlInfoToUpdate: UrlinfoUpdate = {
+    displayName: '',
+    url: ''
+  };
+  constructor(private urlinfoService: UrlinfoService) {}
 
   ngOnInit(): void {
     this.getUrlInfos();
@@ -59,30 +60,16 @@ export class AppComponent implements OnInit {
     )
   }
 
-  public onLogin(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      success => {
-        console.log('Login successful ');
-      },
-      error => {
-        console.error('Login failed', error);
-      }
-    );
+  public openDeleteModal(id: number): void {
+    this.idToDelete = id;
   }
 
-  public add(): void {
-    if (this.urlinfoAdd.url && this.urlinfoAdd.displayName) {
-      this.urlinfoService.addUrlInfo(this.urlinfoAdd).subscribe(
-        response => {
-          console.log('URL info added successfully', response);
-        },
-        error => {
-          console.error('Error adding URL info', error);
-        }
-      );
-    } else {
-      console.error('URL and description are required');
+  public openEditModal(newName: String, newUrl: String, id: number): void {
+    this.urlInfoToUpdate = {
+      displayName: newName,
+      url: newUrl
     }
+    this.idToUpdate = id;
   }
 
 }
