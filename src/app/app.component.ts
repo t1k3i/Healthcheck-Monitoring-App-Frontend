@@ -10,6 +10,7 @@ import { AddComponent } from "./modals/add/add.component";
 import { DeleteComponent } from "./modals/delete/delete.component";
 import { EditComponent } from "./modals/edit/edit.component";
 import { UrlinfoUpdate } from './models/urlInfoUpdate';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit {
     displayName: '',
     url: ''
   };
-  constructor(private urlinfoService: UrlinfoService) {}
+
+  constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.getUrlInfos();
@@ -58,6 +60,10 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     )
+  }
+
+  public loggout(): void {
+    this.authService.logout();
   }
 
   public openDeleteModal(id: number): void {

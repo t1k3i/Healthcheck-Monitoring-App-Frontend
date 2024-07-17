@@ -20,13 +20,23 @@ export class LoginComponent {
   public onLogin(): void {
     this.authService.login(this.username, this.password).subscribe(
       success => {
-        this.closebutton.nativeElement.click(); 
+        this.close();
         console.log('Login successful ');
       },
       error => {
         console.error('Login failed', error);
       }
     );
+  }
+
+  private clear(): void {
+    this.username = '';
+    this.password = '';
+  }
+
+  public close(): void {
+    this.clear();
+    this.closebutton.nativeElement.click();
   }
 
 }

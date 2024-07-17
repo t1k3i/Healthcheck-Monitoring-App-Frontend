@@ -2,7 +2,15 @@
   <nav class="navbar navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">Healthcheck app</a>
-      <button type="button" class="btn btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
+      @if (this.authService.getCurrentUser() == null) {
+        <button type="button" class="btn btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
+      }
+      @else {
+        <div>
+          <span class="me-3 userCred">{{this.authService.getCurrentUser()?.firstName}} {{this.authService.getCurrentUser()?.lastName}}</span>
+          <button type="button" class="btn btn-outline-light my-2 my-sm-0" (click)="loggout()">Logout</button>
+        </div>
+      }
     </div>
   </nav>
 </header>
