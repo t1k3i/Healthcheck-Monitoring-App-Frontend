@@ -3,6 +3,7 @@ import { UrlinfoService } from '../../services/urlinfo.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
 import { FormsModule } from '@angular/forms';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-edit',
@@ -20,13 +21,14 @@ export class EditComponent {
     displayName: '',
     url: ''
   };
-  constructor(private urlinfoService: UrlinfoService) {}
+  constructor(private urlinfoService: UrlinfoService, private eventService: EventService) {}
 
   update(): void {
     this.urlinfoService.updateUrlInfo(this.urlInfo, this.inputFromParent).subscribe(
       (response) => {
         this.closebutton.nativeElement.click(); 
         console.log(response);
+        this.eventService.triggerEvent();
       }, 
       (error: HttpErrorResponse) => {
         alert(error.message);

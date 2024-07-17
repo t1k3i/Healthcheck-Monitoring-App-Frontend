@@ -11,6 +11,8 @@ import { DeleteComponent } from "./modals/delete/delete.component";
 import { EditComponent } from "./modals/edit/edit.component";
 import { UrlinfoUpdate } from './models/urlInfoUpdate';
 import { AuthenticationService } from './services/authentication.service';
+import { Subscription } from 'rxjs';
+import { EventService } from './services/event.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit {
 
   title = 'healthcheck-app';
 
+  private eventSubscription!: Subscription;
+
   public urlinfos: UrlinfoGet[] = [];
   public idToDelete: number = -1;
   public idToUpdate: number = -1;
@@ -31,10 +35,13 @@ export class AppComponent implements OnInit {
     url: ''
   };
 
-  constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService) {}
+  constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService, private eventService: EventService) {}
 
   ngOnInit(): void {
     this.getUrlInfos();
+    this.eventSubscription = this.eventService.event$.subscribe(() => {
+      this.getUrlInfos();
+    });
   }
 
   public searchForUrl(key: string): void {
@@ -52,8 +59,10 @@ export class AppComponent implements OnInit {
   }
 
   public getUrlInfos(): void {
+    console.log("Sam tle");
     this.urlinfoService.getUrlInfos().subscribe(
       (response: UrlinfoGet[]) => {
+        console.log(response);
         this.urlinfos = response;
       }, 
       (error: HttpErrorResponse) => {
