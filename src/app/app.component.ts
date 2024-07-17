@@ -59,10 +59,8 @@ export class AppComponent implements OnInit {
   }
 
   public getUrlInfos(): void {
-    console.log("Sam tle");
     this.urlinfoService.getUrlInfos().subscribe(
       (response: UrlinfoGet[]) => {
-        console.log(response);
         this.urlinfos = response;
       }, 
       (error: HttpErrorResponse) => {
