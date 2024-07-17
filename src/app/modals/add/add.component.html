@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header bg-dark">
           <h5 class="modal-title" id="addModalLable">Add New Url</h5>
-          <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" #closebutton (click)="close()" aria-label="Close"></button>
         </div>
         <div class="modal-body add-body">
           <form id="add-item-form">

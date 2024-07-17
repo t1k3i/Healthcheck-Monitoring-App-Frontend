@@ -15,6 +15,9 @@ export class AuthenticationService {
   public user: Observable<User | null>;
   private currentUser: User | null = null;
 
+  public canUse1: boolean = false;
+  public canUse2: boolean = false;
+
   constructor(private http: HttpClient, private urlinfoService: UrlinfoService) {
     this.userSubject = new BehaviorSubject<User | null>(null);
     this.user = this.userSubject.asObservable();
@@ -30,6 +33,8 @@ export class AuthenticationService {
         user.authdata = window.btoa(username + ':' + password);
         this.currentUser = user;
         this.userSubject.next(user);
+        this.canUse1 = this.currentUser?.role.name === 'USER' || this.currentUser?.role.name === 'ADMIN';
+        this.canUse2 = this.currentUser?.role.name === 'ADMIN';
         return user;
       }));
   }
@@ -37,6 +42,8 @@ export class AuthenticationService {
   logout(): void {
     this.currentUser = null;
     this.userSubject.next(null);
+    this.canUse1 = false;
+    this.canUse2 = false;
   }
 
   getCurrentUser(): User | null {

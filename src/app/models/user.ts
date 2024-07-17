@@ -5,6 +5,6 @@ export interface User {
     lastName: string;
     username: string;
     password: string;
-    roles: Role;
+    role: Role;
     authdata?: string;
 }

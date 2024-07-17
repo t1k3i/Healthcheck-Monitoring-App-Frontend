@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UrlinfoAdd } from '../../models/urlInfoAdd';
 import { UrlinfoService } from '../../services/urlinfo.service';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ export class AddComponent {
     url: '',
     displayName: ''
   };
+  @ViewChild('closebutton') closebutton!: ElementRef;
 
   constructor(private urlinfoService: UrlinfoService) {}
 
@@ -23,6 +24,7 @@ export class AddComponent {
     if (this.urlinfoAdd.url && this.urlinfoAdd.displayName) {
       this.urlinfoService.addUrlInfo(this.urlinfoAdd).subscribe(
         response => {
+          this.close();
           console.log('URL info added successfully', response);
         },
         error => {
@@ -32,6 +34,16 @@ export class AddComponent {
     } else {
       console.error('URL and description are required');
     }
+  }
+
+  private clear(): void {
+    this.urlinfoAdd.url = '';
+    this.urlinfoAdd.displayName = '';
+  }
+
+  public close(): void {
+    this.clear();
+    this.closebutton.nativeElement.click();
   }
 
 }
