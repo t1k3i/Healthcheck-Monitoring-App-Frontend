@@ -43,4 +43,8 @@ export class UrlinfoService {
     return this.http.delete<void>(`${this.apiServer}/urls`);
   }
 
+  public searchUrlInfos(param: string): Observable<UrlinfoGet[]> {
+    return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls/search?query=${encodeURIComponent(param)}`);
+  }
+
 }
