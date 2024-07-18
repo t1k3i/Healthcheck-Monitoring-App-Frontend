@@ -29,9 +29,9 @@
         <div class="mb-3 d-flex">
           <div class="flex-grow-1 me-2">
             <label for="edit-email" class="form-label">Add Email for Alerts</label>
-            <input type="email" class="form-control add-email" id="edit-email" name="edit-email" placeholder="Enter email">
+            <input type="email" class="form-control add-email" id="edit-email" name="edit-email" [(ngModel)]="email" (ngModelChange)="validateEmail()" placeholder="Enter email">
           </div>
-          <button type="submit" class="btn btn-secondary align-self-end">Add</button>
+          <button type="submit" class="btn btn-secondary align-self-end" [disabled]="!email || !isValidEmail" (click)="addEmail()">Add</button>          
         </div>
       </div>
     </div>

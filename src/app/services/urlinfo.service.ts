@@ -31,8 +31,8 @@ export class UrlinfoService {
     return this.http.put<UrlinfoUpdate>(`${this.apiServer}/urls/${urlinfoId}`, urlinfo);
   }
 
-  public updateEmail(email: EmailAdd, urlinfoId: number): Observable<UrlinfoUpdate> {
-    return this.http.put<UrlinfoUpdate>(`${this.apiServer}/urls/${urlinfoId}/addEmail`, email);
+  public updateEmail(email: EmailAdd, urlinfoId: number): Observable<any> {
+    return this.http.put<any>(`${this.apiServer}/email/${urlinfoId}/emails`, email);
   }
 
   public deleteUrlInfo(urlinfoId: number): Observable<any> {

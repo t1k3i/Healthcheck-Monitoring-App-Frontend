@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../services/event.service';
+import { EmailAdd } from '../../models/emailAdd';
 
 @Component({
   selector: 'app-edit',
@@ -21,6 +22,8 @@ export class EditComponent {
     displayName: '',
     url: ''
   };
+  email: string = '';
+  isValidEmail: boolean = false;
   constructor(private urlinfoService: UrlinfoService, private eventService: EventService) {}
 
   update(): void {
@@ -30,6 +33,22 @@ export class EditComponent {
         console.log(response);
         this.eventService.triggerEvent();
       }, 
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  validateEmail() {
+    this.isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+  }
+
+  addEmail(): void {
+    this.urlinfoService.updateEmail({email: this.email}, this.inputFromParent).subscribe(
+      (response) => {
+        console.log(response);
+        this.email = '';
+      },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
