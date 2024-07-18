@@ -99,9 +99,3 @@ header {
 .shad {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
-.form-control:focus {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    outline: none;
-    border-color: #ccc;
-}

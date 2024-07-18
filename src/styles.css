@@ -1,5 +1,12 @@
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
 
+
+.form-control:focus {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    outline: none;
+    border-color: #ccc;
+}
+
 .modal-body {
     padding: 0px;
 }
