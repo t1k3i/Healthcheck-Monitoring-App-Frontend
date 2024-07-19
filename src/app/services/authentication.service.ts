@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { last, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { User } from '../models/user';
 import { UrlinfoService } from './urlinfo.service';
@@ -54,6 +54,14 @@ export class AuthenticationService {
     password: string, role: string): Observable<void> {
     return this.http.post<any>(`${this.urlinfoService.apiServer}/users/register`, 
       { firstName, lastName, username, password, role });
+  }
+
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.urlinfoService.apiServer}/users`);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.urlinfoService.apiServer}/users/${id}`);
   }
 
 }
