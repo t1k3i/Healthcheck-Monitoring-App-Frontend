@@ -1,0 +1,52 @@
+<!-- Modal Code (register) -->
+<div id="register-form" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-white" #closeBtn data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="my-form bg-dark">
+                    <h1 class="text-center">Register form</h1>
+                    <form #userForm="ngForm">
+                        <p class="invalid-input"><span>{{this.authError}}</span></p>
+                        <div class="mb-3 mt-3">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control login-form" ngModel #firstname="ngModel" name="firstName" placeholder="Enter First Name" required>
+                            @if (firstname.invalid && firstname.touched) {
+                                <p class="invalid-input"><span>Enter valid input</span></p>
+                            }
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control login-form" ngModel #lastname="ngModel" name="lastName" placeholder="Enter Last Name" required>
+                            @if (lastname.invalid && lastname.touched) {
+                                <p class="invalid-input"><span>Enter valid input</span></p>
+                            }
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control login-form" ngModel #usern="ngModel" name="username" placeholder="Enter Username" required>
+                            @if (usern.invalid && usern.touched) {
+                                <p class="invalid-input"><span>Enter valid input</span></p>
+                            }
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control login-form" ngModel #pass="ngModel" name="password" placeholder="Enter Password" minlength="3" maxlength="20" required>
+                            @if (pass.invalid && pass.touched) {
+                                <p class="invalid-input"><span>Enter valid input</span></p>
+                            }
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <label for="role">Role</label>
+                            <select class="form-control login-form" ngModel #rol="ngModel" name="role" required>
+                                <option value="USER" selected>User</option>
+                                <option value="ADMIN">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" [disabled]="userForm.invalid" class="btn btn-light mt-3" (click)="register(userForm)">REGISTER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

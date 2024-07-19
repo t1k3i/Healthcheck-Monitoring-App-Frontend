@@ -14,11 +14,12 @@ import { AuthenticationService } from './services/authentication.service';
 import { debounceTime, Subscription } from 'rxjs';
 import { EventService } from './services/event.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from "./modals/register/register.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule, RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

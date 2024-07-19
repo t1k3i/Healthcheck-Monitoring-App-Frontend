@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { last, map } from 'rxjs/operators';
 
 import { User } from '../models/user';
 import { UrlinfoService } from './urlinfo.service';
@@ -48,6 +48,12 @@ export class AuthenticationService {
 
   getCurrentUser(): User | null {
     return this.currentUser;
+  }
+
+  register(firstName: string, lastName: string, username: string, 
+    password: string, role: string): Observable<void> {
+    return this.http.post<any>(`${this.urlinfoService.apiServer}/users/register`, 
+      { firstName, lastName, username, password, role });
   }
 
 }

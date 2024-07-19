@@ -151,3 +151,13 @@
     background-color: #48505a;
     color: #fff;
 }
+
+.invalid-input{
+    color: red;
+    font-size: 12px;
+    margin-top:2px
+}
+
+button:disabled{
+    cursor: not-allowed;
+}
