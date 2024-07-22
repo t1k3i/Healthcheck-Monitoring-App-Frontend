@@ -1,0 +1,28 @@
+<div class="modal fade" #emailsc id="editEmailsModal" tabindex="-1" aria-labelledby="emailsModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+            <h5 class="modal-title" id="addModalLable">Emails list</h5>
+            <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 300px;">Email</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (email of this.emails; track email.id) {
+                    <tr>
+                        <td>{{email.email}}</td>
+                        <td><button (click)="delete(email.id)">D</button></td>
+                    </tr>
+                }   
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

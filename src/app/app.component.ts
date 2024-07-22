@@ -16,11 +16,12 @@ import { EventService } from './services/event.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditusersComponent } from './modals/editusers/editusers.component';
 import { RegisterComponent } from './modals/register/register.component';
+import { EmailsComponent } from './modals/emails/emails.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule, EditusersComponent, RegisterComponent],
+  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule, EditusersComponent, RegisterComponent, EmailsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -81,7 +82,7 @@ export class AppComponent implements OnInit {
     this.authService.logout();
   }
 
-  public openDeleteModal(id: number): void {
+  public openModal(id: number): void {
     this.idToDelete = id;
   }
 

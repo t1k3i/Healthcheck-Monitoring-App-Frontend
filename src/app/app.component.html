@@ -56,8 +56,9 @@
             <div class="col-md-2 edit-div">
               <div class="float-right btn-group btn-group-sm">
                 <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id)"><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse2" data-bs-target="#deleteModal" (click)="openDeleteModal(urlinfo.id)"><i class="fa fa-times"></i></button>
-             </div>
+                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse2" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
+                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -79,5 +80,6 @@
 <app-add></app-add>
 <app-delete [inputFromParent]="idToDelete"></app-delete>
 <app-edit [urlInfo]="urlInfoToUpdate" [inputFromParent]="idToUpdate"></app-edit>
+<app-emails [inputFromParent]="idToDelete"></app-emails>
 <app-register></app-register>
 <app-editusers></app-editusers>

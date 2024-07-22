@@ -1,21 +1,61 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CommonModule } from '@angular/common';
+
+export function passwordValidator(control: AbstractControl): ValidationErrors | null {
+  const password = control.value;
+  if (!password) {
+    return null;
+  }
+
+  const hasNumber = /[0-9]/.test(password);
+  const hasUpper = /[A-Z]/.test(password);
+  const hasLower = /[a-z]/.test(password);
+  const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  const hasMinLength = password.length >= 8;
+
+  const valid = hasNumber && hasUpper && hasLower && hasSpecial && hasMinLength;
+  if (!valid) {
+    return { passwordStrength: true };
+  }
+  return null;
+}
+
+export function capitalizedFirstLetterValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (!value) {
+      return null;
+    }
+
+    const firstLetterIsCapital = /^[A-Z]/.test(value);
+    return firstLetterIsCapital ? null : { capitalizedFirstLetter: true };
+  };
+}
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
-  @ViewChild('userForm') userForm!: NgForm;
+  userForm: FormGroup;
   @ViewChild('closeBtn') closebutton!: ElementRef;
   authError: string = '';
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService) {
+    this.userForm = new FormGroup({
+      firstName: new FormControl("", [Validators.required, capitalizedFirstLetterValidator()]),
+      lastName: new FormControl("", [Validators.required, capitalizedFirstLetterValidator()]),
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required, passwordValidator]),
+      role: new FormControl("USER", [Validators.required])
+    })
+  }
 
   @HostListener('document:click', ['$event'])
   @HostListener('document:keyup.escape', ['$event'])
@@ -25,33 +65,27 @@ export class RegisterComponent {
   
     if (event instanceof MouseEvent) {
       if (modalElement && !modalElement.contains(target)) {
-        this.resetForm(this.userForm);
+        this.userForm.reset({ role: 'USER' });
       }
     } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
-      this.resetForm(this.userForm);
+      this.userForm.reset({ role: 'USER' });
     }
   }
 
-  resetForm(userForm: NgForm): void {
-    userForm.reset({
-      firstName: '',
-      lastName: '',
-      username: '',
-      password: '',
-      role: 'USER'
-    });
+  resetForm(): void {
+    
     this.authError = "";
   } 
 
-  register(form: NgForm): void {
-    this.authService.register(form.value.firstName, form.value.lastName, 
-      form.value.username, form.value.password, form.value.role).subscribe(
+  register(): void {
+    this.authService.register(this.userForm.value.firstName, this.userForm.value.lastName, 
+      this.userForm.value.username, this.userForm.value.password, this.userForm.value.role).subscribe(
         () => {
-          form.resetForm(this.userForm);
+          this.userForm.reset({ role: 'USER' });
           this.close();
         },
         (error) => {
-          form.resetForm(this.userForm);
+          this.userForm.reset({ role: 'USER' });
           if (error.status == 400) {
             this.authError = "Enter valid password";
           } else {

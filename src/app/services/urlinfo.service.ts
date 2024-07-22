@@ -5,6 +5,7 @@ import { UrlinfoGet } from '../models/urlInfoGet';
 import { UrlinfoAdd } from '../models/urlInfoAdd';
 import { UrlinfoUpdate } from '../models/urlInfoUpdate';
 import { EmailAdd } from '../models/emailAdd';
+import { Email } from '../models/email';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,14 @@ export class UrlinfoService {
 
   public searchUrlInfos(param: string): Observable<UrlinfoGet[]> {
     return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls/search?query=${encodeURIComponent(param)}`);
+  }
+
+  public getEmails(urlinfoId: number): Observable<Email[]> {
+    return this.http.get<Email[]>(`${this.apiServer}/email/${urlinfoId}/emails`);
+  }
+
+  public deleteEmail(urlinfoId: number, emailId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServer}/email/${urlinfoId}/emails/${emailId}`);
   }
 
 }
