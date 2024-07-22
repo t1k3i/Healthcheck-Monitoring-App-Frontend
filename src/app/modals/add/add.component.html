@@ -4,22 +4,33 @@
       <div class="modal-content">
         <div class="modal-header bg-dark">
           <h5 class="modal-title" id="addModalLable">Add New Url</h5>
-          <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" #closebutton (click)="close()" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white me-2" #closebutton data-bs-dismiss="modal" (click)="close()" aria-label="Close"></button>
         </div>
         <div class="modal-body add-body">
-          <form id="add-item-form">
+          <form id="add-item-form" [formGroup]="urlForm">
+            <p class="invalid-input"><span>{{this.err}}</span></p>
             <div class="form-group">
               <label for="item-name">Name</label>
-              <input type="text" class="form-control add-form-control" id="item-name" placeholder="Enter name" [(ngModel)]="urlinfoAdd.displayName" name="url" required>
+              <input type="text" class="form-control add-form-control" id="item-name" placeholder="Enter name" formControlName="displayName">
+              @if (urlForm.controls["displayName"].invalid && (urlForm.controls["displayName"].touched || urlForm.controls["displayName"].dirty)) {
+                <p class="invalid-input">
+                    <span>Enter valid input</span>
+                </p>
+              }
             </div>
             <div class="form-group mt-2">
               <label for="item-url">URL</label>
-              <input type="url" class="form-control add-form-control" id="item-url" placeholder="Enter URL" [(ngModel)]="urlinfoAdd.url" name="displayName" required>
+              <input type="url" class="form-control add-form-control" id="item-url" placeholder="Enter URL" formControlName="url">
+              @if (urlForm.controls["url"].invalid && (urlForm.controls["url"].touched || urlForm.controls["url"].dirty)) {
+                <p class="invalid-input">
+                    <span>Enter valid url</span>
+                </p>
+              }
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary save-url" form="add-item-form" (click)="add()">Save url</button>
+          <button type="submit" class="btn btn-primary save-url" [disabled]="urlForm.invalid" form="add-item-form" (click)="add()">Save url</button>
         </div>
       </div>
     </div>

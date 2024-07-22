@@ -71,12 +71,7 @@ export class RegisterComponent {
       this.userForm.reset({ role: 'USER' });
     }
   }
-
-  resetForm(): void {
-    
-    this.authError = "";
-  } 
-
+  
   register(): void {
     this.authService.register(this.userForm.value.firstName, this.userForm.value.lastName, 
       this.userForm.value.username, this.userForm.value.password, this.userForm.value.role).subscribe(

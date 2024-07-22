@@ -1,50 +1,61 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { UrlinfoAdd } from '../../models/urlInfoAdd';
 import { UrlinfoService } from '../../services/urlinfo.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-add',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './add.component.html',
   styleUrl: './add.component.css'
 })
 export class AddComponent {
 
-  urlinfoAdd: UrlinfoAdd = {
-    url: '',
-    displayName: ''
-  };
+  urlForm: FormGroup;
+  err: string = '';
   @ViewChild('closebutton') closebutton!: ElementRef;
 
-  constructor(private urlinfoService: UrlinfoService, private eventService: EventService) {}
+  constructor(private urlinfoService: UrlinfoService, private eventService: EventService) {
+    this.urlForm = new FormGroup({
+      displayName: new FormControl("", [Validators.required]),
+      url: new FormControl("", [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)])
+    })
+  }
 
   public add(): void {
-    if (this.urlinfoAdd.url && this.urlinfoAdd.displayName) {
-      this.urlinfoService.addUrlInfo(this.urlinfoAdd).subscribe(
-        response => {
-          this.close();
-          console.log('URL info added successfully', response);
-          this.eventService.triggerEvent();
-        },
-        error => {
-          console.error('Error adding URL info', error);
-        }
-      );
-    } else {
-      console.error('URL and description are required');
+    this.urlinfoService.addUrlInfo({ url: this.urlForm.value.url, displayName: this.urlForm.value.displayName }).subscribe(
+      () => {
+        this.close();
+        this.eventService.triggerEvent();
+        this.urlForm.reset();
+        this.err = '';
+      },
+      () => {
+        this.err = 'Url or name already exists';
+      }
+    );
+  }
+
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:keyup.escape', ['$event'])
+  onDocumentEvent(event: MouseEvent | KeyboardEvent): void {
+    const target = event.target as HTMLElement;
+    const modalElement = document.getElementById('add-form');
+  
+    if (event instanceof MouseEvent) {
+      if (modalElement && !modalElement.contains(target)) {
+        this.urlForm.reset();
+        this.err = '';
+      }
+    } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
+      this.urlForm.reset();
+      this.err = '';
     }
   }
 
-  private clear(): void {
-    this.urlinfoAdd.url = '';
-    this.urlinfoAdd.displayName = '';
-  }
-
   public close(): void {
-    this.clear();
     this.closebutton.nativeElement.click();
   }
 
