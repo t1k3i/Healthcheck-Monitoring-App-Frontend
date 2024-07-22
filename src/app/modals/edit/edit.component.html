@@ -10,28 +10,49 @@
         
       <!-- Modal Body -->
       <div class="modal-body edit-body">
-        <form id="add-item-form-update">
+        <form id="add-item-form-update" [formGroup]="editForm">
+          <p class="invalid-input"><span>{{this.errEdit}}</span></p>
          <div class="form-group">
-            <label for="item-name">Name</label>
-            <input type="text" class="form-control add-form-control" ngModel="{{urlInfo.displayName}}" [(ngModel)]="urlInfo.displayName" id="item-name-update" name="name">
+            <label for="item-name-update">Name</label>
+            <input type="text" class="form-control add-form-control" id="item-name-update" formControlName="displayName">
+            @if (editForm.controls["displayName"].invalid && (editForm.controls["displayName"].touched)) {
+              <p class="invalid-input">
+                  <span>Enter valid input</span>
+              </p>
+            }
           </div>
           <div class="form-group mt-2">
-            <label for="item-url">URL</label>
-            <input type="url" class="form-control add-form-control" id="item-url-update" ngModel="{{urlInfo.url}}" [(ngModel)]="urlInfo.url" name="url">
+            <label for="item-url-update">URL</label>
+            <input type="url" class="form-control add-form-control" id="item-url-update" formControlName="url">
+            @if (editForm.controls["url"].invalid && (editForm.controls["url"].touched)) {
+              <p class="invalid-input">
+                  <span>Enter valid input</span>
+              </p>
+            }
           </div>
         </form>
         <div class="mb-3 d-flex flex-column align-items-center mt-3">
-          <button type="submit" class="btn btn-primary" (click)="update()">Save Changes</button>
+          <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid" (click)="update()">Save Changes</button>
         </div>
         <hr>
           
         <!-- Second Section: Add Email -->
-        <div class="mb-3 d-flex">
-          <div class="flex-grow-1 me-2">
-            <label for="edit-email" class="form-label">Add Email for Alerts</label>
-            <input type="email" class="form-control add-email" id="edit-email" name="edit-email" [(ngModel)]="email" (ngModelChange)="validateEmail()" placeholder="Enter email">
-          </div>
-          <button type="submit" class="btn btn-secondary align-self-end" [disabled]="!email || !isValidEmail" (click)="addEmail()">Add</button>          
+        <div class="mb-3">
+          <form [formGroup]="emailForm" class="col-md-12">
+            <p class="invalid-input"><span>{{this.errEmail}}</span></p>
+            <div class="flex-grow-1 me-2">
+              <label for="edit-email" class="form-label">Add Email for Alerts</label>
+              <input type="email" class="form-control add-email" id="edit-email" formControlName="email" placeholder="Enter email">
+              @if (emailForm.controls["email"].invalid && (emailForm.controls["email"].touched || emailForm.controls["email"].dirty)) {
+                <p class="invalid-input">
+                    <span>Enter valid email</span>
+                </p>
+              }
+            </div>
+          </form> 
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-secondary" [disabled]="emailForm.invalid" (click)="addEmail()">Add</button>
+          </div>  
         </div>
       </div>
     </div>

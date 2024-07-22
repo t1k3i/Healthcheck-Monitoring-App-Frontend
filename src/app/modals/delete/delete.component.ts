@@ -18,9 +18,8 @@ export class DeleteComponent {
 
   delete(): void {
     this.urlinfoService.deleteUrlInfo(this.inputFromParent).subscribe(
-      (response) => {
+      () => {
         this.closebutton.nativeElement.click(); 
-        console.log(response);
         this.eventService.triggerEvent();
       }, 
       (error: HttpErrorResponse) => {
