@@ -1,19 +1,23 @@
 <header>
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Healthcheck app</a>
+      <div>
+        <a class="navbar-brand" href="#">Healthcheck app</a>
+        <div class="dropdown">
+          <button type="button" class="btn btn-light me-2 dropbtn" [disabled]="!this.authService.canUse2"><i class="bi bi-gear"></i></button>
+          @if (this.authService.canUse2) {
+            <div class="dropdown-content">
+              <button type="button" data-bs-toggle="modal" data-bs-target="#register-form">Register user</button>
+              <button data-bs-toggle="modal" data-bs-target="#editusers-form">Edit users</button>
+            </div>
+          }
+        </div>
+      </div>
       @if (this.authService.getCurrentUser() == null) {
         <button type="button" class="btn btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
       }
       @else {
         <div>
-          <div class="dropdown">
-            <button type="button" class="btn btn-light me-2 dropbtn" [disabled]="!this.authService.canUse2" [hidden]="!this.authService.canUse2"><i class="bi bi-gear"></i></button>
-            <div class="dropdown-content">
-              <button type="button" data-bs-toggle="modal" data-bs-target="#register-form">Register user</button>
-              <button data-bs-toggle="modal" data-bs-target="#editusers-form">Edit users</button>
-            </div>
-          </div>
           <span class="me-3 userCred">{{this.authService.getCurrentUser()?.firstName}} {{this.authService.getCurrentUser()?.lastName}}</span>
           <button type="button" class="btn btn-outline-light my-2 my-sm-0" (click)="loggout()">Logout</button>
         </div>
@@ -56,8 +60,8 @@
             <div class="col-md-2 edit-div">
               <div class="float-right btn-group btn-group-sm">
                 <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id)"><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse2" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
-                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
+                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Emails" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
+                <button class="btn btn-secondary del tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse2" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
               </div>
             </div>
           </div>
