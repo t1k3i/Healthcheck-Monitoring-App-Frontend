@@ -27,6 +27,15 @@
                 </p>
               }
             </div>
+            <div class="form-group mt-2">
+              <label for="item-frequency">Frequency</label>
+              <input type="number" class="form-control add-form-control" id="item-frequency" placeholder="Enter frequency" formControlName="frequency">
+              @if (urlForm.controls["frequency"].invalid && (urlForm.controls["frequency"].touched || urlForm.controls["frequency"].dirty)) {
+                <p class="invalid-input">
+                    <span>Enter valid frequency</span>
+                </p>
+              }
+            </div>
           </form>
         </div>
         <div class="modal-footer">

@@ -1,4 +1,5 @@
 export interface UrlinfoUpdate {
     displayName: String;
-    url?: String;
+    url: String;
+    frequency: number;
 }

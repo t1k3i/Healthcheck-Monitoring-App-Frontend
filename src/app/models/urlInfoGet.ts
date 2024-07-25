@@ -1,6 +1,8 @@
 export interface UrlinfoGet {
     url: String;
     displayName: String;
-    healthy: boolean;
+    healthy: Boolean;
     id: number;
+    mute: boolean;
+    frequency: number;
 }

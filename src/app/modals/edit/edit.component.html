@@ -30,6 +30,15 @@
               </p>
             }
           </div>
+          <div class="form-group mt-2">
+            <label for="item-frequency-update">Frequency</label>
+            <input type="frequency" class="form-control add-form-control" id="item-frequency-update" formControlName="frequency">
+            @if (editForm.controls["frequency"].invalid && (editForm.controls["frequency"].touched)) {
+              <p class="invalid-input">
+                  <span>Enter valid input</span>
+              </p>
+            }
+          </div>
         </form>
         <div class="mb-3 d-flex flex-column align-items-center mt-3">
           <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid" (click)="update()">Save Changes</button>

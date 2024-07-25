@@ -38,7 +38,8 @@ export class AppComponent implements OnInit {
   public idToUpdate: number = -1;
   public urlInfoToUpdate: UrlinfoUpdate = {
     displayName: '',
-    url: ''
+    url: '',
+    frequency: 0
   };
 
   constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService, private eventService: EventService) {
@@ -86,12 +87,25 @@ export class AppComponent implements OnInit {
     this.idToDelete = id;
   }
 
-  public openEditModal(newName: String, newUrl: String, id: number): void {
+  public openEditModal(newName: String, newUrl: String, id: number, newFrequency: number): void {
     this.urlInfoToUpdate = {
       displayName: newName,
-      url: newUrl
+      url: newUrl,
+      frequency: newFrequency
     }
     this.idToUpdate = id;
+  }
+
+  public toggle(id: number) {
+    this.urlinfoService.toggleMute(id).subscribe(
+      () => {
+        console.log("sucess");
+        this.eventService.triggerEvent();
+      }, 
+      () => {
+        console.log("error");
+      }
+    )
   }
 
 }

@@ -2,9 +2,16 @@ import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/
 import { UrlinfoService } from '../../services/urlinfo.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 
+// Custom validator to check if the value is a number greater than one
+export function greaterThanOneValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const isValid = control.value >= 1 && !isNaN(control.value);
+    return isValid ? null : { 'greaterThanOne': { value: control.value } };
+  };
+}
 
 @Component({
   selector: 'app-edit',
@@ -20,7 +27,8 @@ export class EditComponent {
 
   @Input() urlInfo: UrlinfoUpdate = {
     displayName: '',
-    url: ''
+    url: '',
+    frequency: 0
   };
   errEdit = '';
   editForm: FormGroup;
@@ -35,16 +43,17 @@ export class EditComponent {
     });
     this.editForm = new FormGroup({
       displayName: new FormControl(this.urlInfo.displayName, [Validators.required]),
-      url: new FormControl(this.urlInfo.url, [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)])
+      url: new FormControl(this.urlInfo.url, [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)]),
+      frequency:  new FormControl(this.urlInfo.frequency, [Validators.required, greaterThanOneValidator()]),
     })
   }
 
   update(): void {
-    this.urlinfoService.updateUrlInfo({ displayName: this.editForm.value.displayName, url: this.editForm.value.url }, this.inputFromParent).subscribe(
+    this.urlinfoService.updateUrlInfo({ displayName: this.editForm.value.displayName, url: this.editForm.value.url, frequency: this.editForm.value.frequency }, this.inputFromParent).subscribe(
       () => {
         this.closebutton.nativeElement.click();
         this.eventService.triggerEvent();
-        this.editForm.reset({ displayName: this.editForm.value.displayName, url: this.editForm.value.url });
+        this.editForm.reset({ displayName: this.editForm.value.displayName, url: this.editForm.value.url, frequency: this.editForm.value.frequency });
         this.errEdit = '';
       }, 
       () => {
@@ -74,13 +83,13 @@ export class EditComponent {
     if (event instanceof MouseEvent) {
       if (modalElement && !modalElement.contains(target)) {
         this.emailForm.reset();
-        this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url });
+        this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.editForm.value.frequency });
         this.errEdit = '';
         this.errEmail = '';
       }
     } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
       this.emailForm.reset();
-      this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url });
+      this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.editForm.value.frequency });
       this.errEmail = '';
       this.errEdit = '';
     }

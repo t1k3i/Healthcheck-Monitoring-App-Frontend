@@ -45,7 +45,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-3">
               <h3 class="card-title">{{ urlinfo?.displayName }}</h3>
               <p class="card-text">URL: <a href="#">{{ urlinfo?.url }}</a></p>
             </div>
@@ -57,11 +57,18 @@
                 <div class="status-circle unhealthy shad"></div>
               }
             </div>
+            <div class="col-md-2">
+              <h3 class="card-title">{{ urlinfo?.mute }}</h3>
+            </div>
+            <div class="col-md-2">
+              <h3 class="card-title">{{ urlinfo?.frequency }}</h3>
+            </div>
             <div class="col-md-2 edit-div">
               <div class="float-right btn-group btn-group-sm">
-                <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id)"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id, urlinfo.frequency)"><i class="fa fa-pencil"></i></button>
                 <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Emails" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
-                <button class="btn btn-secondary del tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse2" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
+                <button class="btn btn-secondary del tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
+                <button class="btn btn-secondary tooltips" data-placement="top" [disabled]="!this.authService.canUse1" (click)="toggle(urlinfo.id)">Toggle</button>
               </div>
             </div>
           </div>

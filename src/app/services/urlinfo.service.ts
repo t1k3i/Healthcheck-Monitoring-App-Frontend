@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UrlinfoGet } from '../models/urlInfoGet';
@@ -12,12 +12,13 @@ import { Email } from '../models/email';
 })
 export class UrlinfoService {
 
-  apiServer = 'https://healthcheckmonitorapp.azurewebsites.net';
+  apiServer = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
-  public getUrlInfos(): Observable<UrlinfoGet[]> {
-    return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls`);
+  public getUrlInfos(healthyFirst: boolean = true): Observable<UrlinfoGet[]> {
+    const params = new HttpParams().set('healthyFirst', healthyFirst.toString());
+    return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls`, { params });
   }
 
   public getUrlInfo(urlinfoId: number): Observable<UrlinfoGet[]> {
@@ -34,6 +35,10 @@ export class UrlinfoService {
 
   public updateEmail(email: EmailAdd, urlinfoId: number): Observable<any> {
     return this.http.put<any>(`${this.apiServer}/email/${urlinfoId}/emails`, email);
+  }
+
+  public toggleMute(urlinfoId: number): Observable<any> {
+    return this.http.put<any>(`${this.apiServer}/urls/toggle/${urlinfoId}`, {});
   }
 
   public deleteUrlInfo(urlinfoId: number): Observable<any> {
