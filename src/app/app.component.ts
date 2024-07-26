@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
     url: '',
     frequency: 0
   };
+  private sort: boolean = true;
 
   constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService, private eventService: EventService) {
     this.searchControl.valueChanges
@@ -69,7 +70,7 @@ export class AppComponent implements OnInit {
   }
 
   public getUrlInfos(): void {
-    this.urlinfoService.getUrlInfos().subscribe(
+    this.urlinfoService.getUrlInfos(this.sort).subscribe(
       (response: UrlinfoGet[]) => {
         this.urlinfos = response;
       }, 
@@ -107,5 +108,23 @@ export class AppComponent implements OnInit {
       }
     )
   }
+
+  changeOrder(): void {
+    this.sort = this.sort ? false : true;
+    this.eventService.triggerEvent();
+  }
+
+  performHealthCheckNow(id: number): void {
+    this.urlinfoService.performHealthcheckNow(id).subscribe(
+      () => {
+        console.log("success");
+        this.eventService.triggerEvent();
+      }, 
+      (error) => {
+        console.log("error", error);
+      }
+    );
+}
+
 
 }

@@ -40,42 +40,55 @@
     </div>
   </section>
 
-  <section>
-    @for (urlinfo of this.urlinfos; track urlinfo.id) {
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-3">
-              <h3 class="card-title">{{ urlinfo?.displayName }}</h3>
-              <p class="card-text">URL: <a href="#">{{ urlinfo?.url }}</a></p>
-            </div>
-            <div class="col-md-3 circle-div">
-              @if (urlinfo?.healthy) {
-                <div class="status-circle healthy shad"></div>
-              }
-              @else {
-                <div class="status-circle unhealthy shad"></div>
-              }
-            </div>
-            <div class="col-md-2">
-              <h3 class="card-title">{{ urlinfo?.mute }}</h3>
-            </div>
-            <div class="col-md-2">
-              <h3 class="card-title">{{ urlinfo?.frequency }}</h3>
-            </div>
-            <div class="col-md-2 edit-div">
-              <div class="float-right btn-group btn-group-sm">
-                <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id, urlinfo.frequency)"><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Emails" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
-                <button class="btn btn-secondary del tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
-                <button class="btn btn-secondary tooltips" data-placement="top" [disabled]="!this.authService.canUse1" (click)="toggle(urlinfo.id)">Toggle</button>
-              </div>
-            </div>
-          </div>
-        </div>
+  @if (urlinfos.length != 0) {
+    <section>
+      <div class="container mt-5">
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Display Name</th>
+              <th>Full URL</th>
+              <th>
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-sm ml-2" (click)="changeOrder()">Status</button>
+                </div>
+              </th>
+              <th>Check Frequency</th>
+              <th>Mute</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (urlinfo of this.urlinfos; track urlinfo.id) {
+              <tr>
+                <td>{{urlinfo.displayName}}</td>
+                <td>{{urlinfo.url}}</td>
+                @if (urlinfo?.healthy) {
+                  <td><span class="status-circle healthy shad"></span></td>
+                }
+                @else {
+                  <td><span class="status-circle unhealthy shad"></span></td>
+                }
+                <td>{{urlinfo.frequency}} min</td>
+                @if (urlinfo.mute) {
+                  <td><button class="btn btn-warning btn-sm" [disabled]="!this.authService.canUse1" (click)="toggle(urlinfo.id)">Unmute</button></td>
+                }
+                @else {
+                  <td><button class="btn btn-warning btn-sm" [disabled]="!this.authService.canUse1" (click)="toggle(urlinfo.id)">Mute</button></td>
+                }
+                <td>
+                  <button class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editModal" (click)="openEditModal(urlinfo.displayName, urlinfo.url, urlinfo.id, urlinfo.frequency)"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-secondary tooltips" data-placement="top" data-original-title="Emails" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#editEmailsModal" (click)="openModal(urlinfo.id)"><i class="bi bi-envelope"></i></button>
+                  <button class="btn btn-secondary del tooltips" data-placement="top" data-original-title="Delete" data-bs-toggle="modal" [disabled]="!this.authService.canUse1" data-bs-target="#deleteModal" (click)="openModal(urlinfo.id)"><i class="fa fa-times"></i></button>
+                  <button class="btn btn-primary tooltips" data-placement="top" data-original-title="PerformNow" [disabled]="!this.authService.canUse1" (click)="performHealthCheckNow(urlinfo.id)">Now</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
-    }
-  </section>
+    </section>
+  }
 </main>
 
 @if (urlinfos.length == 0) {
