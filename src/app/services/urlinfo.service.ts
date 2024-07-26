@@ -61,4 +61,8 @@ export class UrlinfoService {
     return this.http.delete<void>(`${this.apiServer}/email/${urlinfoId}/emails/${emailId}`);
   }
 
+  public performHealthcheckNow(urlinfoId: number): Observable<any> {
+    return this.http.put<any>(`${this.apiServer}/urls/healthcheck/${urlinfoId}`, {});
+  }
+
 }
