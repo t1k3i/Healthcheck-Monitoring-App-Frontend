@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { UrlinfoService } from '../../services/urlinfo.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
