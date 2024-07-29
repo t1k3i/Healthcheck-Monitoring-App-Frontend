@@ -31,7 +31,7 @@
     color: white;
     border: none;
     margin: -20px;
-    margin-right: 8px;
+    margin-right: 2px;
 }
 
 .dropdown-menu {
@@ -39,6 +39,10 @@
 }
 
 /* SECTION */
+
+main section {
+    margin-top: 34px;
+}
   
 .input-group {
     position: relative;
@@ -83,5 +87,36 @@
     border-color: #004EA8;
     color: white;
 }
-  
+
+/* MAIN BODY */
+
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+th .btn {
+    font-size: 0.95rem;
+    color: inherit;
+    font-weight: bold;
+}
+
+th i {
+    font-size: 0.95rem;
+    font-weight: 1000;
+}
+
+th .btn i {
+    margin-left: 0.1rem;
+}
+
+thead {
+    border-bottom: 2px solid #333;
+}
+
+table {
+    border: 1px solid #979797;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
   
