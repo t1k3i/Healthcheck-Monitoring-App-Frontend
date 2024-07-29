@@ -37,3 +37,51 @@
 .dropdown-menu {
     margin-left: -8.6rem;
 }
+
+/* SECTION */
+  
+.input-group {
+    position: relative;
+}
+  
+.search-urls {
+    border-radius: 0px;
+    padding: 10px 12px 10px 40px; /* Adjust padding to the right to make room for the icon */
+    border: 1px solid #979797;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-urls input {
+    border-radius: 4px;
+}
+  
+.search-urls:focus {
+    border-color: #004EA8;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4);
+    z-index: -2; 
+}
+  
+.search-urls::placeholder {
+    color: #999;
+    /* Padding left adjusted for placeholder only if needed */
+}
+  
+.search i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px; /* Position the icon inside the input field */
+    font-size: 1.2em;
+    color: #aaa;
+    pointer-events: none;
+}
+
+.add-urls {
+    border-radius: 0%;
+    background-color: #004EA8;
+    border-color: #004EA8;
+    color: white;
+}
+  
+  

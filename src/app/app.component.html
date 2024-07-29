@@ -14,9 +14,16 @@
             <i class="bi bi-list"></i>
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <li class="dropdown-header">
-              <i class="bi bi-person-circle"></i> {{this.authService.getCurrentUser()?.firstName}} {{this.authService.getCurrentUser()?.lastName}}
-            </li>
+            @if (this.authService.getCurrentUser()?.role?.name === "ADMIN") {
+              <li class="dropdown-header">
+                <i class="bi bi-person-circle"></i> {{this.authService.getCurrentUser()?.firstName}} {{this.authService.getCurrentUser()?.lastName}} (A)
+              </li>
+            }
+            @else {
+              <li class="dropdown-header">
+                <i class="bi bi-person-circle"></i> {{this.authService.getCurrentUser()?.firstName}} {{this.authService.getCurrentUser()?.lastName}}  (U)
+              </li>
+            }
             @if (this.authService.canUse2) {
               <li><hr class="dropdown-divider"></li>
               <li>
@@ -41,15 +48,16 @@
 </header>
 
 <main class="container mainBody">
-  <section class="mb-4">
+  <section class="mb-4 mt-5">
     <div class="row">
       <div class="col-md-8">
-        <div class="input-group">
-          <input type="text" class="form-control search-urls" [formControl]="searchControl" placeholder="Search...">
+        <div class="input-group search">
+          <input type="text" class="form-control search-urls" [formControl]="searchControl" placeholder="Search by name or url">
+          <i class="bi bi-search"></i>
         </div>
       </div>
       <div class="col-md-4 d-flex justify-content-end">
-        <button class="btn btn-primary add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1">Add Url</button>
+        <button class="btn btn-primary add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1" [hidden]="!this.authService.canUse1">Add url</button>
       </div>
     </div>
   </section>
