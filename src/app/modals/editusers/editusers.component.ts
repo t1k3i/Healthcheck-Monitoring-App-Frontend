@@ -1,19 +1,23 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-editusers',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './editusers.component.html',
-  styleUrl: './editusers.component.css'
+  styleUrls: ['./editusers.component.css']
 })
 export class EditusersComponent implements AfterViewInit {
   @ViewChild('editusers', { static: true }) modal!: ElementRef;
   users: User[] = [];
+  confirmingUserId: number | null = null;
+  loading = true;
+  timeoutId: any;
 
-  constructor(private authService: AuthenticationService, private renderer: Renderer2) {}
+  constructor(public authService: AuthenticationService, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
     const modalElement = this.modal.nativeElement;
@@ -23,6 +27,14 @@ export class EditusersComponent implements AfterViewInit {
 
     modalElement.addEventListener('hidden.bs.modal', () => {
       this.users = [];
+      this.loading = true;
+    });
+
+    this.renderer.listen(modalElement, 'click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      if (modalElement.contains(target) && !target.classList.contains('btn')) {
+        this.resetButton();
+      }
     });
   }
 
@@ -30,9 +42,10 @@ export class EditusersComponent implements AfterViewInit {
     this.authService.getAll().subscribe(
       (response: User[]) => {
         this.users = response;
+        this.loading = false;
       },
       () => {
-        console.log("errrrorrr");
+        this.loading = false;
       }
     )
   }
@@ -40,13 +53,24 @@ export class EditusersComponent implements AfterViewInit {
   delete(id: number): void {
     this.authService.delete(id).subscribe(
       () => {
-        console.log("Zbrisal uspešno userja");
         this.getUsers();
-      },
-      () => {
-        console.log("errrrorrr");
       }
     )
   }
 
+  onDeleteClick(id: number) {
+    if (this.confirmingUserId === id) {
+      this.delete(id);
+      this.resetButton();
+    } else {
+      this.resetButton();
+      this.confirmingUserId = id;
+      this.timeoutId = setTimeout(() => this.resetButton(), 3000);
+    }
+  }
+
+  resetButton() {
+    clearTimeout(this.timeoutId);
+    this.confirmingUserId = null;
+  }
 }

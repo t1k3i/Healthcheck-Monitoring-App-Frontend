@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body userModals pt-5">
                 <div class="my-form">
-                    <form (ngSubmit)="onLogin(userForm)" #userForm="ngForm">
+                    <form (ngSubmit)="onLogin(userForm)" #userForm="ngForm" autocomplete="off">
                         <p class="invalid-input"><span>{{this.authError}}</span></p>
                         <div class="input-group input-modals">
                             <span class="input-group-text">

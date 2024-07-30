@@ -1,5 +1,3 @@
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
-
 .modal-header {
     background-color: #004EA8;
     height: 50px;
@@ -7,7 +5,7 @@
 }
 
 .modal-header h6 {
-    font-weight: 150;
+    font-weight: 400;
 }
 
 .userModals {
@@ -50,6 +48,12 @@
     border-radius: 0%;
 }
 
+.editUsersEmails {
+    border-radius: 0%;
+    background-color: #004EA8;
+    border: none;
+}
+
 /* ERRORS */
 
 .invalid-input{
@@ -57,4 +61,10 @@
     font-size: 12px;
     margin-top:-15px;
     display: block;
+}
+
+.custom-spinner {
+    border-top-color: #004EA8;
+    border-bottom-color: #004EA8;
+    border-left-color: #004EA8;
 }

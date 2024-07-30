@@ -1,33 +1,48 @@
 <div class="modal fade" id="editusers-form" #editusers tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title" id="addModalLable">Users list</h5>
-          <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header">
+          <h6 class="modal-title" id="addModalLable">Users list</h6>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Username</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-                @for (user of this.users; track user.id) {
-                    <tr>
-                        <td>{{user.username}}</td>
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.lastName}}</td>
-                        <td>{{user.role.name}}</td>
-                        <td><button (click)="delete(user.id)">D</button></td>
-                    </tr>
-                }
-            </tbody>
-          </table>
+        <div class="modal-body pt-4 mb-3">
+          @if (!loading) {
+            <div class="list-group">
+              <div class="list-group-item current-user">
+                <div class="position-relative">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 small">{{ this.authService.getCurrentUser()?.username }}</h6>
+                      <small class="text-muted">
+                        {{ this.authService.getCurrentUser()?.firstName }} {{ this.authService.getCurrentUser()?.lastName }} ({{ this.authService.getCurrentUser()?.role!.name }})
+                      </small>
+                    </div>
+                  </div>
+                  <span class="badge bg-secondary position-absolute top-0 end-0 rounded-start">Current User</span>
+                </div>
+              </div>
+              @for (user of this.users; track user.id) {
+                  <div class="list-group-item">
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="d-flex flex-column">
+                              <h6 class="mb-1 small">{{user.username}}</h6>
+                              <small class="text-muted">{{user.firstName}} {{user.lastName}} ({{user.role.name}})</small>
+                          </div>
+                          <button (click)="onDeleteClick(user.id)" class="btn btn-primary btn-sm editUsersEmails"
+                          [ngStyle]="{'background-color': confirmingUserId === user.id ? 'red' : ''}">
+                          {{ confirmingUserId === user.id ? 'Confirm' : 'Delete' }}</button>
+                      </div>
+                  </div>
+              }
+            </div>
+          }
+          @else {
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="spinner-border custom-spinner" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>

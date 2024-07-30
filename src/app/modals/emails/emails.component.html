@@ -1,27 +1,37 @@
 <div class="modal fade" #emailsc id="editEmailsModal" tabindex="-1" aria-labelledby="emailsModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-dark">
-            <h5 class="modal-title" id="addModalLable">Emails list</h5>
-            <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header">
+            <h6 class="modal-title" id="addModalLable">Emails list</h6>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
         <div class="modal-body">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 300px;">Email</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-                @for (email of this.emails; track email.id) {
-                    <tr>
-                        <td>{{email.email}}</td>
-                        <td><button (click)="delete(email.id)">D</button></td>
-                    </tr>
-                }   
-            </tbody>
-          </table>
+          @if (!this.loading) {
+            <div class="list-group">
+              @for (email of this.emails; track email.id) {
+                <div class="list-group-item">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="d-flex flex-column">
+                          <h6 class="mb-1 small">{{email.email}}</h6>
+                      </div>
+                      <button (click)="onDeleteClick(email.id)" class="btn btn-primary btn-sm editUsersEmails"
+                            [ngStyle]="{'background-color': confirmingEmailId === email.id ? 'red' : ''}">
+                            {{ confirmingEmailId === email.id ? 'Confirm' : 'Delete' }}</button>
+                  </div>
+                </div>
+              }   
+            </div>
+          }
+          @else {
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="spinner-border custom-spinner" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          }
+          @if (!this.loading && this.emails.length == 0) {
+            <label>No connected emails</label>
+          }
         </div>
       </div>
     </div>

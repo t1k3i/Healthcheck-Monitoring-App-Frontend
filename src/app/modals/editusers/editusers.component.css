@@ -1,0 +1,12 @@
+/* Highlight the current user */
+.current-user {
+    background-color: #f0f8ff; /* Light blue background or any other distinctive style */
+    border-left: 4px solid #004EA8; /* Blue border or any other style */
+    position: relative; /* Ensure positioning context for the badge */
+  }
+  
+  /* Customize the Bootstrap badge if needed */
+  .badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }

@@ -6,9 +6,9 @@
                 <h6 class="modal-title" id="registerModal">Register form</h6>
                 <button type="button" class="btn-close btn-sm btn-close-white" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
             </div>
-            <div class="modal-body userModals">
+            <div class="modal-body">
                 <div class="my-form">
-                    <form [formGroup]="userForm">
+                    <form [formGroup]="userForm" autocomplete="off">
                         <p class="invalid-input mt-3"><span>{{this.authError}}</span></p>
                         <div class="input-modals">
                             <label for="first-name">First Name</label>

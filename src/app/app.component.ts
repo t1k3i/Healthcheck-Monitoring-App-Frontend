@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
 
   selectedUrlInfo: UrlinfoGet | null = null;
 
+  loading = true;
+
   constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService, private eventService: EventService) {
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
@@ -81,9 +83,11 @@ export class AppComponent implements OnInit {
     this.urlinfoService.getUrlInfos(this.sort).subscribe(
       (response: UrlinfoGet[]) => {
         this.urlinfos = response;
+        this.loading = false;
       }, 
       (error: HttpErrorResponse) => {
         alert(error.message);
+        this.loading = false;
       }
     )
   }

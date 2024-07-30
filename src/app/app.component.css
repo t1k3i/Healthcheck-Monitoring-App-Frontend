@@ -180,3 +180,11 @@ table td:first-child {
 .custom-border {
     border-top: 1px solid #333;
 }
+
+.center-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
