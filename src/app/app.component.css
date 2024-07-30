@@ -90,9 +90,26 @@ main section {
 
 /* MAIN BODY */
 
-th {
+.table-container {
+    max-height: 63vh;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+/* For WebKit browsers (Chrome, Safari, etc.) */
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+thead th {
     text-align: center;
     vertical-align: middle;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
 }
 
 th .btn {
@@ -110,13 +127,63 @@ th .btn i {
     margin-left: 0.1rem;
 }
 
-thead {
-    border-bottom: 2px solid #333;
-}
-
 table {
-    border: 1px solid #979797;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
+table th {
+    /* Apply both top and bottom borders to the <th> */
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+}
   
+table td {
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+  
+table th:first-child {
+    border-left: 2px solid;
+}
+
+table td:first-child {
+    border-left: 1px solid;
+}
+
+.monitor-con {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100%;            /* Ensure full height to center vertically */
+}
+  
+/* Buttons */
+.actions-buttons button {
+    margin-right: 0.2rem;
+    border: none;
+    border-radius: 0%;
+}
+
+.edit-btn {
+    background-color: #004EA8;
+}
+
+.delete-btn {
+    background-color: red;
+}
+  
+/* FOOTER */
+
+.foot {
+    border-top: 1px solid;
+    width: 67.5%;
+}
+
+@media (max-width: 399px) {
+    .foot {
+        font-size: 0.7rem;
+    }
+}
