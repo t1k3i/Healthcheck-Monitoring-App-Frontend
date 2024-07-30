@@ -43,6 +43,8 @@ export class AppComponent implements OnInit {
   };
   private sort: boolean = true;
 
+  selectedUrlInfo: UrlinfoGet | null = null;
+
   constructor(private urlinfoService: UrlinfoService, public authService: AuthenticationService, private eventService: EventService) {
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
@@ -55,7 +57,13 @@ export class AppComponent implements OnInit {
     this.getUrlInfos();
     this.eventSubscription = this.eventService.event$.subscribe(() => {
       this.getUrlInfos();
+      this.selectedUrlInfo = null;
     });
+    document.addEventListener('click', this.onDocumentClick.bind(this));
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this.onDocumentClick.bind(this));
   }
 
   public searchForUrl(key: string): void {
@@ -88,6 +96,10 @@ export class AppComponent implements OnInit {
     this.idToDelete = id;
   }
 
+  openModalOuter(): void {
+    this.openModal(this.selectedUrlInfo!.id);
+  }
+
   public openEditModal(newName: String, newUrl: String, id: number, newFrequency: number): void {
     this.urlInfoToUpdate = {
       displayName: newName,
@@ -97,14 +109,15 @@ export class AppComponent implements OnInit {
     this.idToUpdate = id;
   }
 
+  public openEditModalOuter(): void {
+    this.openEditModal(this.selectedUrlInfo!.displayName, this.selectedUrlInfo!.url, this.selectedUrlInfo!.id, this.selectedUrlInfo!.frequency);
+  }
+
   public toggle(id: number) {
+    this.selectedUrlInfo = null;
     this.urlinfoService.toggleMute(id).subscribe(
       () => {
-        console.log("sucess");
         this.eventService.triggerEvent();
-      }, 
-      () => {
-        console.log("error");
       }
     )
   }
@@ -117,14 +130,31 @@ export class AppComponent implements OnInit {
   performHealthCheckNow(id: number): void {
     this.urlinfoService.performHealthcheckNow(id).subscribe(
       () => {
-        console.log("success");
         this.eventService.triggerEvent();
       }, 
       (error) => {
         console.log("error", error);
       }
     );
-}
+  }
+
+  performHealthCheckNowOuter(): void {
+    this.performHealthCheckNow(this.selectedUrlInfo!.id);
+  }
+
+  onDocumentClick(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+
+    // Check if the clicked element is outside the table
+    if (!targetElement.closest('table')) {
+      this.selectedUrlInfo = null;
+    }
+  }
+
+  selectRow(urlinfo: UrlinfoGet, event: MouseEvent) {
+    event.stopPropagation();
+    this.selectedUrlInfo = urlinfo;
+  }
 
 
 }

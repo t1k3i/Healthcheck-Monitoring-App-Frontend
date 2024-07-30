@@ -49,4 +49,8 @@ export class EmailsComponent implements AfterViewInit {
       }
     )
   }
+
+  addEmail(): void {
+    
+  }
 }

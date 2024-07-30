@@ -2,44 +2,46 @@
 <div id="add-form" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addUrlModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title" id="addModalLable">Add New Url</h5>
-          <button type="button" class="btn-close btn-close-white me-2" #closebutton data-bs-dismiss="modal" (click)="close()" aria-label="Close"></button>
+        <div class="modal-header">
+          <h6 class="modal-title" id="addModalLable">Add New Url</h6>
+          <button type="button" class="btn-close btn-close-white" #closebutton data-bs-dismiss="modal" (click)="close()" aria-label="Close"></button>
         </div>
         <div class="modal-body add-body">
-          <form id="add-item-form" [formGroup]="urlForm">
-            <p class="invalid-input"><span>{{this.err}}</span></p>
-            <div class="form-group">
-              <label for="item-name">Name</label>
-              <input type="text" class="form-control add-form-control" id="item-name" placeholder="Enter name" formControlName="displayName">
+          <div class="my-form">
+            <form id="add-item-form" [formGroup]="urlForm">
+              <p class="invalid-input mt-3"><span>{{this.err}}</span></p>
+              <div class="form-group input-modals">
+                <label for="item-name">Name</label>
+                <input type="text" class="form-control form-control-sm modal-forms" id="item-name" placeholder="Enter name" formControlName="displayName">
+              </div>
               @if (urlForm.controls["displayName"].invalid && (urlForm.controls["displayName"].touched || urlForm.controls["displayName"].dirty)) {
                 <p class="invalid-input">
-                    <span>Enter valid input</span>
+                    <span>Enter valid name</span>
                 </p>
               }
-            </div>
-            <div class="form-group mt-2">
-              <label for="item-url">URL</label>
-              <input type="url" class="form-control add-form-control" id="item-url" placeholder="Enter URL" formControlName="url">
+              <div class="form-group input-modals">
+                <label for="item-url">URL</label>
+                <input type="url" class="form-control form-control-sm modal-forms" id="item-url" placeholder="Enter URL" formControlName="url">
+              </div>
               @if (urlForm.controls["url"].invalid && (urlForm.controls["url"].touched || urlForm.controls["url"].dirty)) {
                 <p class="invalid-input">
                     <span>Enter valid url</span>
                 </p>
               }
-            </div>
-            <div class="form-group mt-2">
-              <label for="item-frequency">Frequency</label>
-              <input type="number" class="form-control add-form-control" id="item-frequency" placeholder="Enter frequency" formControlName="frequency">
+              <div class="form-group input-modals">
+                <label for="item-frequency">Frequency (minutes)</label>
+                <input type="number" class="form-control form-control-sm add-form-control modal-forms" id="item-frequency" placeholder="Enter frequency" formControlName="frequency">
+              </div>
               @if (urlForm.controls["frequency"].invalid && (urlForm.controls["frequency"].touched || urlForm.controls["frequency"].dirty)) {
                 <p class="invalid-input">
                     <span>Enter valid frequency</span>
                 </p>
               }
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary save-url" [disabled]="urlForm.invalid" form="add-item-form" (click)="add()">Save url</button>
+        <div class="centerButton">
+          <button type="submit" class="btn btn-sm btn-primary save-url submitButton" [disabled]="urlForm.invalid" form="add-item-form" (click)="add()">Save url</button>
         </div>
       </div>
     </div>

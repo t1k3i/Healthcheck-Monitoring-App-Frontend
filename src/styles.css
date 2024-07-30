@@ -1,163 +1,60 @@
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
 
+.modal-header {
+    background-color: #004EA8;
+    height: 50px;
+    color: white;
+}
 
-.form-control:focus {
+.modal-header h6 {
+    font-weight: 150;
+}
+
+.userModals {
+    background-color: #e1e4e6;
+}
+
+.userModals2 {
+    background-color: #e1e4e6;
+    border-radius: 0.5rem;
+}
+
+
+.centerButton {
+    text-align: center;
+}
+
+.submitButton {
+    margin-bottom: 30px;
+    border-radius: 0%;
+    background-color: #004EA8;
+    border: none;
+}
+
+.modal-forms:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     outline: none;
     border-color: #ccc;
 }
 
-.modal-body {
-    padding: 0px;
+.input-modals {
+    margin-bottom: 25px;
 }
 
-.btn-close {
-    position: absolute;
-    right: 0;
-    padding: 1rem;
+.my-form label {
+    margin-bottom: 2px;
+    font-size: small;
 }
 
-.modal-content {
-    width: 80%;
-    margin: 0px auto;
-}
-
-.my-form {
-    max-width: 100%;
-    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
-    padding: 2rem;
-    max-width: 100%;
-    color: #fff;
-    box-shadow: 0 4px 6px 0px rgba(22, 22, 26, 0.18);
-}
-
-.login-form {
-    background-color: inherit;
-    color: #fff;
-    padding-left: 0px;
-    border: 0px;
-    border-bottom: 1px solid #fff;
-}
-
-.my-form .btn {
-    width: 100%;
-    font-weight: 800;
-    background-color: #fff;
-    border-radius: 0;
-    padding: 0.5em 0;
-}
-
-.my-form .btn:hover {
-    color: #333;
-}
-
-.signup {
-    text-align: center;
-    padding-top: 2em;
-    color: grey;
-}
-
-.signup a {
-    color: #e1e1e1;
-    text-decoration: none;
-}
-
-.signup a:hover {
-    color: #fff;
-}
-
-/* Add url modal */
-
-.modal-header {
-    color: white;
-    border-bottom: 1px solid #dee2e6;
-}
-  
-.modal-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.add-body, .edit-body {
-    padding: 2rem;
-}
-
-.form-group label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.form-group label.required::after {
-    content: " *";
-    color: red;
-    margin-left: 5px;
-    font-weight: 700;
-}
-
-.add-form-control {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid #dee2e6;
-    padding: 1rem;
-}
-
-.save-url {
-    border-radius: 0%;
-    border: none;
-    background-color: #343a40;
-}
-
-.save-url:hover {
-    background-color: #48505a;
-    color: #fff;
-}
-
-.modal-content, .modal-body, .modal-header, .modal-footer {
-    border-radius: 0% !important;
-}
-
-.modal button {
+.delete-button {
     border-radius: 0%;
 }
 
-.flex-grow-1 label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.edit-body button {
-    border: none;
-    background-color: #343a40;
-}
-
-.edit-body button:hover {
-    background-color: #48505a;
-    color: #fff;
-}
+/* ERRORS */
 
 .invalid-input{
     color: red;
     font-size: 12px;
-    margin-top:2px
-}
-
-button:disabled{
-    cursor: not-allowed;
+    margin-top:-15px;
+    display: block;
 }

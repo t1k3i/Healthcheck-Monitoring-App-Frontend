@@ -2,52 +2,56 @@
 <div id="register-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" #closeBtn data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="my-form bg-dark">
-                    <h1 class="text-center">Register form</h1>
+            <div class="modal-header pb-3">
+                <h6 class="modal-title" id="registerModal">Register form</h6>
+                <button type="button" class="btn-close btn-sm btn-close-white" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
+            </div>
+            <div class="modal-body userModals">
+                <div class="my-form">
                     <form [formGroup]="userForm">
-                        <p class="invalid-input"><span>{{this.authError}}</span></p>
-                        <div class="mb-3 mt-3">
+                        <p class="invalid-input mt-3"><span>{{this.authError}}</span></p>
+                        <div class="input-modals">
                             <label for="first-name">First Name</label>
-                            <input id="first-name" type="text" class="form-control login-form" formControlName="firstName" placeholder="Enter First Name">
-                            @if (userForm.controls["firstName"].invalid && (userForm.controls["firstName"].touched || userForm.controls["firstName"].dirty)) {
-                                <p class="invalid-input">
-                                    <span>Enter valid input (must start with capital letter)</span>
-                                </p>
-                            }
+                            <input id="first-name" type="text" class="form-control form-control-sm modal-forms login-form" formControlName="firstName" placeholder="first name">
                         </div>
-                        <div class="mb-3 mt-3">
+                        @if (userForm.controls["firstName"].invalid && (userForm.controls["firstName"].touched || userForm.controls["firstName"].dirty)) {
+                            <p class="invalid-input">
+                                <span>Enter valid input (must start with capital letter)</span>
+                            </p>
+                        }
+                        <div class="input-modals">
                             <label for="last-name">Last Name</label>
-                            <input id="last-name" type="text" class="form-control login-form" formControlName="lastName" placeholder="Enter Last Name">
-                            @if (userForm.controls["lastName"].invalid && (userForm.controls["lastName"].touched || userForm.controls["lastName"].dirty)) {
-                                <p class="invalid-input"><span>Enter valid input (must start with capital letter)</span></p>
-                            }
+                            <input id="last-name" type="text" class="form-control form-control-sm modal-forms login-form" formControlName="lastName" placeholder="last name">
                         </div>
-                        <div class="mb-3 mt-3">
+                        @if (userForm.controls["lastName"].invalid && (userForm.controls["lastName"].touched || userForm.controls["lastName"].dirty)) {
+                            <p class="invalid-input"><span>Enter valid input (must start with capital letter)</span></p>
+                        }
+                        <div class="input-modals">
                             <label for="username">Username</label>
-                            <input id="username" type="text" class="form-control login-form" formControlName="username" placeholder="Enter Username">
-                            @if (userForm.controls["username"].invalid && (userForm.controls["username"].touched || userForm.controls["username"].dirty)) {
-                                <p class="invalid-input"><span>Enter valid input</span></p>
-                            }
+                            <input id="username" type="text" class="form-control form-control-sm modal-forms login-form" formControlName="username" placeholder="username">
                         </div>
-                        <div class="mb-3 mt-3">
+                        @if (userForm.controls["username"].invalid && (userForm.controls["username"].touched || userForm.controls["username"].dirty)) {
+                            <p class="invalid-input"><span>Enter valid input</span></p>
+                        }
+                        <div class="input-modals">
                             <label for="password">Password</label>
-                            <input id="password" type="password" class="form-control login-form" formControlName="password" placeholder="Enter Password">
-                            @if (userForm.controls["password"].invalid && (userForm.controls["password"].touched || userForm.controls["password"].dirty)) {
-                                <p class="invalid-input"><span>Enter valid input (1 big letter, 1 small letter, 1 number, 1 special character and atleast 8 characters long)</span></p>
-                            }
+                            <input id="password" type="password" class="form-control form-control-sm modal-forms login-form" formControlName="password" placeholder="password">
                         </div>
-                        <div class="mb-3 mt-3">
+                        @if (userForm.controls["password"].invalid && (userForm.controls["password"].touched || userForm.controls["password"].dirty)) {
+                            <p class="invalid-input"><span>Enter valid input (1 big letter, 1 small letter, 1 number, 1 special character and atleast 8 characters long)</span></p>
+                        }
+                        <div class="input-modals">
                             <label for="role">Role</label>
-                            <select id="role" class="form-control login-form" formControlName="role">
+                            <select id="role" class="form-control modal-forms form-control-sm login-form" formControlName="role">
                                 <option value="USER" selected>User</option>
                                 <option value="ADMIN">Admin</option>
                             </select>
                         </div>
-                        <button type="submit" [disabled]="userForm.invalid" (click)="register()" class="btn btn-light mt-3">REGISTER</button>
                     </form>
                 </div>
+            </div>
+            <div class="centerButton userModals2">
+                <button type="submit" [disabled]="userForm.invalid" (click)="register()" class="btn btn-sm btn-primary mt-3 submitButton">REGISTER</button>
             </div>
         </div>
     </div>

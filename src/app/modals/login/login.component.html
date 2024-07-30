@@ -1,31 +1,39 @@
-<!-- Modal Code (login) -->
 <div id="login-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" (click)="close(userForm)" #closebutton aria-label="Close"></button>
-                <div class="my-form bg-dark">
-                    <h1 class="text-center">Login form</h1>
+            <div class="modal-header">
+                <h6 class="modal-title" id="loginModal">Login</h6>
+                <button type="button" class="btn-close btn-sm btn-close-white" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
+            </div>
+            <div class="modal-body userModals pt-5">
+                <div class="my-form">
                     <form (ngSubmit)="onLogin(userForm)" #userForm="ngForm">
                         <p class="invalid-input"><span>{{this.authError}}</span></p>
-                        <div class="mb-3 mt-3">
-                            <label for="username">Username</label>
-                            <input type="username" class="form-control login-form" ngModel name="username" #usern="ngModel" placeholder="Enter Username" required>
-                            @if (usern.invalid && usern.touched) {
-                                <p class="invalid-input"><span>Enter valid input</span></p>
-                            }
+                        <div class="input-group input-modals">
+                            <span class="input-group-text">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" class="form-control modal-forms login-form" ngModel name="username" #usern="ngModel" placeholder="username" required>
                         </div>
-                        <div class="mb-3 mt-3">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control login-form" ngModel name="password" #pass="ngModel" placeholder="Enter password" minlength="3" maxlength="20" required>
-                            @if (pass.invalid && pass.touched) {
-                                <p class="invalid-input"><span>Enter valid input</span></p>
-                            }
+                        @if (usern.invalid && usern.touched) {
+                            <p class="invalid-input"><span>Enter valid username</span></p>
+                        }
+                        <div class="input-group input-modals">
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" class="form-control modal-forms login-form" ngModel name="password" #pass="ngModel" placeholder="password" minlength="3" maxlength="20" required>
                         </div>
-                        <button type="submit" [disabled]="userForm.invalid" class="btn btn-light mt-3">LOGIN</button>
+                        @if (pass.invalid && pass.touched) {
+                            <p class="invalid-input"><span>Enter valid password</span></p>
+                        }
                     </form>
                 </div>
+            </div>
+            <div class="centerButton userModals2">
+                <button type="submit" (click)="onLogin(userForm)" [disabled]="userForm.invalid" class="btn btn-primary mt-3 submitButton">LOGIN</button>
             </div>
         </div>
     </div>
 </div>
+
