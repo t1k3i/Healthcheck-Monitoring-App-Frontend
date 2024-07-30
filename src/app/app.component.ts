@@ -117,11 +117,7 @@ export class AppComponent implements OnInit {
     this.selectedUrlInfo = null;
     this.urlinfoService.toggleMute(id).subscribe(
       () => {
-        console.log("sucess");
         this.eventService.triggerEvent();
-      }, 
-      () => {
-        console.log("error");
       }
     )
   }
@@ -134,7 +130,6 @@ export class AppComponent implements OnInit {
   performHealthCheckNow(id: number): void {
     this.urlinfoService.performHealthcheckNow(id).subscribe(
       () => {
-        console.log("success");
         this.eventService.triggerEvent();
       }, 
       (error) => {

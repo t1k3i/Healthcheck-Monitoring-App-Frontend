@@ -4,14 +4,6 @@ import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 
-// Custom validator to check if the value is a number greater than one
-export function greaterThanOneValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = control.value >= 1 && !isNaN(control.value);
-    return isValid ? null : { 'greaterThanOne': { value: control.value } };
-  };
-}
-
 @Component({
   selector: 'app-edit',
   standalone: true,
@@ -43,7 +35,7 @@ export class EditComponent {
     this.editForm = new FormGroup({
       displayName: new FormControl(this.urlInfo.displayName, [Validators.required]),
       url: new FormControl(this.urlInfo.url, [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)]),
-      frequency:  new FormControl(this.urlInfo.frequency, [Validators.required, greaterThanOneValidator()]),
+      frequency:  new FormControl(this.urlInfo.frequency, [Validators.required, Validators.min(1)]),
     })
   }
 
@@ -61,18 +53,6 @@ export class EditComponent {
     )
   }
 
-  addEmail(): void {
-    this.urlinfoService.updateEmail({email: this.emailForm.value.email}, this.inputFromParent).subscribe(
-      () => {
-        this.emailForm.reset();
-        this.errEmail = '';
-      },
-      () => {
-        this.errEmail = 'This email is already connected wit this url';
-      }
-    )
-  }
-
   @HostListener('document:click', ['$event'])
   @HostListener('document:keyup.escape', ['$event'])
   onDocumentEvent(event: MouseEvent | KeyboardEvent): void {
@@ -81,14 +61,12 @@ export class EditComponent {
   
     if (event instanceof MouseEvent) {
       if (modalElement && !modalElement.contains(target)) {
-        this.emailForm.reset();
-        this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.editForm.value.frequency });
+        this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.urlInfo.frequency });
         this.errEdit = '';
         this.errEmail = '';
       }
     } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
-      this.emailForm.reset();
-      this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.editForm.value.frequency });
+      this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.urlInfo.frequency });
       this.errEmail = '';
       this.errEdit = '';
     }

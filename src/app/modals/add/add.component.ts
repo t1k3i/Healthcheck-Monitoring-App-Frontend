@@ -4,14 +4,6 @@ import { UrlinfoService } from '../../services/urlinfo.service';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 
-// Custom validator to check if the value is a number greater than one
-export function greaterThanOneValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const isValid = control.value >= 1 && !isNaN(control.value);
-    return isValid ? null : { 'greaterThanOne': { value: control.value } };
-  };
-}
-
 @Component({
   selector: 'app-add',
   standalone: true,
@@ -29,7 +21,7 @@ export class AddComponent {
     this.urlForm = new FormGroup({
       displayName: new FormControl("", [Validators.required]),
       url: new FormControl("", [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)]),
-      frequency: new FormControl("", [Validators.required, greaterThanOneValidator()])
+      frequency: new FormControl("", [Validators.required, Validators.min(1)])
     })
   }
 

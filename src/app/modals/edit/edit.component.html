@@ -1,67 +1,46 @@
 <!-- Modal Code (edit) -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header bg-dark">
-        <h5 class="modal-title" id="editModalLabel">Edit Item</h5>
-        <button type="button" class="btn-close btn-close-white me-2" #closebutton data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header">
+        <h6 class="modal-title" id="editModalLabel">Edit Item</h6>
+        <button type="button" class="btn-close btn-close-white" #closebutton data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-        
-      <!-- Modal Body -->
       <div class="modal-body edit-body">
-        <form id="add-item-form-update" [formGroup]="editForm">
-          <p class="invalid-input"><span>{{this.errEdit}}</span></p>
-         <div class="form-group">
-            <label for="item-name-update">Name</label>
-            <input type="text" class="form-control add-form-control" id="item-name-update" formControlName="displayName">
+        <div class="my-form">
+          <form id="add-item-form-update" [formGroup]="editForm">
+            <p class="invalid-input mt-3"><span>{{this.errEdit}}</span></p>
+            <div class="form-group input-modals">
+              <label for="item-name-update">Name</label>
+              <input type="text" class="form-control modal-forms add-form-control" id="item-name-update" formControlName="displayName" placeholder="Enter name">
+            </div>
             @if (editForm.controls["displayName"].invalid && (editForm.controls["displayName"].touched)) {
               <p class="invalid-input">
                   <span>Enter valid input</span>
               </p>
             }
-          </div>
-          <div class="form-group mt-2">
-            <label for="item-url-update">URL</label>
-            <input type="url" class="form-control add-form-control" id="item-url-update" formControlName="url">
+            <div class="form-group input-modals">
+              <label for="item-url-update">URL</label>
+              <input type="url" class="form-control modal-forms add-form-control" id="item-url-update" formControlName="url" placeholder="Enter url">
+            </div>
             @if (editForm.controls["url"].invalid && (editForm.controls["url"].touched)) {
               <p class="invalid-input">
                   <span>Enter valid input</span>
               </p>
             }
-          </div>
-          <div class="form-group mt-2">
-            <label for="item-frequency-update">Frequency</label>
-            <input type="frequency" class="form-control add-form-control" id="item-frequency-update" formControlName="frequency">
+            <div class="form-group input-modals">
+              <label for="item-frequency-update">Frequency</label>
+              <input type="number" class="form-control form-control-sm add-form-control modal-forms" id="item-frequency-update" placeholder="Enter frequency" formControlName="frequency">
+            </div>
             @if (editForm.controls["frequency"].invalid && (editForm.controls["frequency"].touched)) {
               <p class="invalid-input">
                   <span>Enter valid input</span>
               </p>
             }
-          </div>
-        </form>
-        <div class="mb-3 d-flex flex-column align-items-center mt-3">
-          <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid" (click)="update()">Save Changes</button>
+          </form>
         </div>
-        <hr>
-          
-        <!-- Second Section: Add Email -->
-        <div class="mb-3">
-          <form [formGroup]="emailForm" class="col-md-12">
-            <p class="invalid-input"><span>{{this.errEmail}}</span></p>
-            <div class="flex-grow-1 me-2">
-              <label for="edit-email" class="form-label">Add Email for Alerts</label>
-              <input type="email" class="form-control add-email" id="edit-email" formControlName="email" placeholder="Enter email">
-              @if (emailForm.controls["email"].invalid && (emailForm.controls["email"].touched || emailForm.controls["email"].dirty)) {
-                <p class="invalid-input">
-                    <span>Enter valid email</span>
-                </p>
-              }
-            </div>
-          </form> 
-          <div class="text-center mt-3">
-            <button type="submit" class="btn btn-secondary" [disabled]="emailForm.invalid" (click)="addEmail()">Add</button>
-          </div>  
+        <div class="centerButton">
+          <button type="submit" class="btn submitButton btn-primary" [disabled]="editForm.invalid || editForm.pristine" (click)="update()">Save Changes</button>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export function passwordValidator(control: AbstractControl): ValidationErrors | 
   const hasNumber = /[0-9]/.test(password);
   const hasUpper = /[A-Z]/.test(password);
   const hasLower = /[a-z]/.test(password);
-  const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  const hasSpecial = /[@#$%^&+=]/.test(password);
   const hasMinLength = password.length >= 8;
 
   const valid = hasNumber && hasUpper && hasLower && hasSpecial && hasMinLength;
