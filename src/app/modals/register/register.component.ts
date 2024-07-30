@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CommonModule } from '@angular/common';
 
@@ -66,9 +66,11 @@ export class RegisterComponent {
     if (event instanceof MouseEvent) {
       if (modalElement && !modalElement.contains(target)) {
         this.userForm.reset({ role: 'USER' });
+        this.authError = "";
       }
     } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
       this.userForm.reset({ role: 'USER' });
+      this.authError = "";
     }
   }
   
@@ -78,14 +80,11 @@ export class RegisterComponent {
         () => {
           this.userForm.reset({ role: 'USER' });
           this.close();
+          this.authError = "";
         },
         (error) => {
           this.userForm.reset({ role: 'USER' });
-          if (error.status == 400) {
-            this.authError = "Enter valid password";
-          } else {
-            this.authError = "Username already exists";
-          }
+          this.authError = "Username already exists";
         }
       )
   }
