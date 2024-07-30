@@ -44,7 +44,7 @@ export function capitalizedFirstLetterValidator(): ValidatorFn {
 export class RegisterComponent {
 
   userForm: FormGroup;
-  @ViewChild('closeBtn') closebutton!: ElementRef;
+  @ViewChild('closebutton') closebutton!: ElementRef;
   authError: string = '';
 
   constructor(private authService: AuthenticationService) {

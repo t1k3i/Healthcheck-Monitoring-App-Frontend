@@ -177,13 +177,6 @@ table td:first-child {
   
 /* FOOTER */
 
-.foot {
-    border-top: 1px solid;
-    width: 67.5%;
-}
-
-@media (max-width: 399px) {
-    .foot {
-        font-size: 0.7rem;
-    }
+.custom-border {
+    border-top: 1px solid #333;
 }
