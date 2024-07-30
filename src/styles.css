@@ -14,6 +14,12 @@
     background-color: #e1e4e6;
 }
 
+.userModals2 {
+    background-color: #e1e4e6;
+    border-radius: 0.5rem;
+}
+
+
 .centerButton {
     text-align: center;
 }
@@ -38,6 +44,10 @@
 .my-form label {
     margin-bottom: 2px;
     font-size: small;
+}
+
+.delete-button {
+    border-radius: 0%;
 }
 
 /* ERRORS */

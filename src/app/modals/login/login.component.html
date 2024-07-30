@@ -1,4 +1,3 @@
-<!-- Modal Code (login) -->
 <div id="login-form" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -28,12 +27,13 @@
                         @if (pass.invalid && pass.touched) {
                             <p class="invalid-input"><span>Enter valid password</span></p>
                         }
-                        <div class="centerButton">
-                            <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary mt-3 submitButton">LOGIN</button>
-                        </div>
                     </form>
                 </div>
+            </div>
+            <div class="centerButton userModals2">
+                <button type="submit" (click)="onLogin(userForm)" [disabled]="userForm.invalid" class="btn btn-primary mt-3 submitButton">LOGIN</button>
             </div>
         </div>
     </div>
 </div>
+

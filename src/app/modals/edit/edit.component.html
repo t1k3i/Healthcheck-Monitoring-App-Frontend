@@ -29,7 +29,7 @@
               </p>
             }
             <div class="form-group input-modals">
-              <label for="item-frequency-update">Frequency</label>
+              <label for="item-frequency-update">Frequency (minutes)</label>
               <input type="number" class="form-control form-control-sm add-form-control modal-forms" id="item-frequency-update" placeholder="Enter frequency" formControlName="frequency">
             </div>
             @if (editForm.controls["frequency"].invalid && (editForm.controls["frequency"].touched)) {
@@ -40,7 +40,7 @@
           </form>
         </div>
         <div class="centerButton">
-          <button type="submit" class="btn submitButton btn-primary" [disabled]="editForm.invalid || editForm.pristine" (click)="update()">Save Changes</button>
+          <button type="submit" class="btn submitButton btn-sm btn-primary" [disabled]="editForm.invalid || editForm.pristine" (click)="update()">Save Changes</button>
         </div>
       </div>
     </div>
