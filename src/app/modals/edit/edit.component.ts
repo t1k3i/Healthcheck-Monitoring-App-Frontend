@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { UrlinfoService } from '../../services/urlinfo.service';
 import { UrlinfoUpdate } from '../../models/urlInfoUpdate';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 
 @Component({
@@ -24,14 +24,7 @@ export class EditComponent {
   errEdit = '';
   editForm: FormGroup;
 
-  errEmail = '';
-  emailForm: FormGroup;
-
-
   constructor(private urlinfoService: UrlinfoService, private eventService: EventService) {
-    this.emailForm = new FormGroup({
-      email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)])
-    });
     this.editForm = new FormGroup({
       displayName: new FormControl(this.urlInfo.displayName, [Validators.required]),
       url: new FormControl(this.urlInfo.url, [Validators.required, Validators.pattern(/\b(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/)]),
@@ -63,11 +56,9 @@ export class EditComponent {
       if (modalElement && !modalElement.contains(target)) {
         this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.urlInfo.frequency });
         this.errEdit = '';
-        this.errEmail = '';
       }
     } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
       this.editForm.reset({ displayName: this.urlInfo.displayName, url: this.urlInfo.url, frequency: this.urlInfo.frequency });
-      this.errEmail = '';
       this.errEdit = '';
     }
   }

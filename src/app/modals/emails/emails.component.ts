@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, Renderer2, ViewChild } from '@angular/core';
 import { Email } from '../../models/email';
 import { UrlinfoService } from '../../services/urlinfo.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-emails',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './emails.component.html',
   styleUrl: './emails.component.css'
 })
@@ -20,7 +20,14 @@ export class EmailsComponent implements AfterViewInit {
   timeoutId: any;
   loading = true;
 
-  constructor(private renderer: Renderer2, private urlinfoService: UrlinfoService) {}
+  errEmail = '';
+  emailForm: FormGroup;
+
+  constructor(private renderer: Renderer2, private urlinfoService: UrlinfoService) {
+    this.emailForm = new FormGroup({
+      email: new FormControl("", [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)])
+    });
+  }
 
   ngAfterViewInit(): void {
     const modalElement = this.modal.nativeElement;
@@ -78,6 +85,30 @@ export class EmailsComponent implements AfterViewInit {
   }
 
   addEmail(): void {
-    
+    this.urlinfoService.updateEmail({ email: this.emailForm.value.email }, this.inputFromParent).subscribe(
+      () => {
+        this.getEmails();
+      },
+      () => {
+        this.errEmail = 'This email is already connected';
+      }
+    );
+  }
+
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:keyup.escape', ['$event'])
+  onDocumentEvent(event: MouseEvent | KeyboardEvent): void {
+    const target = event.target as HTMLElement;
+    const modalElement = document.getElementById('editEmailsModal');
+  
+    if (event instanceof MouseEvent) {
+      if (modalElement && !modalElement.contains(target)) {
+        this.emailForm.reset();
+        this.errEmail = '';
+      }
+    } else if (event instanceof KeyboardEvent && event.key === 'Escape') {
+      this.emailForm.reset();
+      this.errEmail = '';
+    }
   }
 }
