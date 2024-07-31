@@ -12,7 +12,7 @@ import { Email } from '../models/email';
 })
 export class UrlinfoService {
 
-  apiServer = 'healthcheckmonitorapp.azurewebsites.net';
+  apiServer = 'https://healthcheckmonitorapp.azurewebsites.net';
 
   constructor(private http: HttpClient) { }
 
