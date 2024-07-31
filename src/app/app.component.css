@@ -26,12 +26,16 @@
 }
 
 .dropdown .btn {
-    font-size: 2.1rem;
+    font-size: 1.3rem;
     background-color: #004EA8;
     color: white;
     border: none;
     margin: -20px;
     margin-right: 2px;
+}
+
+.dropdown .btn:hover {
+    background-color: #3378b8;
 }
 
 .dropdown-menu {
@@ -50,14 +54,10 @@ main section {
   
 .search-urls {
     border-radius: 0px;
-    padding: 10px 12px 10px 40px; /* Adjust padding to the right to make room for the icon */
+    padding-left: 30px;
     border: 1px solid #979797;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-}
-
-.search-urls input {
-    border-radius: 4px;
 }
   
 .search-urls:focus {
@@ -68,15 +68,14 @@ main section {
   
 .search-urls::placeholder {
     color: #999;
-    /* Padding left adjusted for placeholder only if needed */
 }
   
 .search i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 12px; /* Position the icon inside the input field */
-    font-size: 1.2em;
+    left: 12px;
+    font-size: 0.75em;
     color: #aaa;
     pointer-events: none;
 }
@@ -108,56 +107,24 @@ thead th {
     vertical-align: middle;
     position: sticky;
     top: 0;
-    background-color: white;
+    background-color: #80abd3;
     z-index: 1;
 }
 
 th .btn {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: inherit;
     font-weight: bold;
 }
 
 th i {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 1000;
-}
-
-th .btn i {
-    margin-left: 0.1rem;
 }
 
 table {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-table th {
-    /* Apply both top and bottom borders to the <th> */
-    border-top: 2px solid;
-    border-bottom: 2px solid;
-    border-right: 2px solid;
-}
-  
-table td {
-    border-bottom: 1px solid;
-    border-right: 1px solid;
-}
-  
-table th:first-child {
-    border-left: 2px solid;
-}
-
-table td:first-child {
-    border-left: 1px solid;
-}
-
-.monitor-con {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    height: 100%;            /* Ensure full height to center vertically */
+    font-size: 0.9rem;
 }
   
 /* Buttons */

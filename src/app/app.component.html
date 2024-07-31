@@ -6,7 +6,7 @@
         <a class="navbar-brand">HEALTHCHECK</a>
       </div>
       @if (this.authService.getCurrentUser() == null) {
-        <button type="button" class="btn btn-sm btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
+        <button type="button" class="btn btn-sm btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">LOGIN</button>
       }
       @else {
         <div class="dropdown">
@@ -36,7 +36,7 @@
             }
             <li>
               <button class="dropdown-item" type="button" id="logoutButton" (click)="loggout()">
-                Logout <i class="bi bi-box-arrow-right"></i>
+                <i class="bi bi-box-arrow-right"></i> Logout
               </button>
             </li>
           </ul>
@@ -49,7 +49,7 @@
 
 <main class="container">
   <section class="mb-5">
-    <div class="row">
+    <div class="row align-items-center">
       <div class="col-sm-8">
         <div class="input-group search">
           <input type="text" class="form-control form-control-sm search-urls" [formControl]="searchControl" placeholder="Search by name or url">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="col-sm-4 d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1" [hidden]="!this.authService.canUse1">Add url</button>
+        <button class="btn btn-sm btn-primary add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1" [hidden]="!this.authService.canUse1">ADD URL</button>
       </div>
     </div>
   </section>
@@ -70,28 +70,30 @@
             <tr>
               <th>Status</th>
               <th>Name</th>
-              <th>Full URL</th>
+              <th class="text-nowrap">Full URL</th>
               <th>
                 <div class="text-center">
-                  <button class="btn btn-sm" (click)="changeOrder()">Health <i class="bi bi-arrow-down-up"></i></button>
+                  <button class="btn btn-sm text-nowrap" (click)="changeOrder()">Health <i class="bi bi-arrow-down-up"></i></button>
                 </div>
               </th>
-              <th>Last checked</th>
-              <th>Frequency</th>
+              <th class="text-nowrap">Last checked</th>
+              <th class="text-nowrap">Frequency (min)</th>
             </tr>
           </thead>
           <tbody>
             @for (urlinfo of this.urlinfos; track urlinfo.id) {
               <tr (click)="selectRow(urlinfo, $event)" [class.table-primary]="urlinfo === selectedUrlInfo">
-                <td class="monitor-con">
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" (change)="toggle(urlinfo.id)" 
-                          [disabled]="!this.authService.canUse1" [checked]="!urlinfo.mute">
+                <td class="text-center align-middle">
+                  <div class="d-flex justify-content-center align-items-center w-100">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" (change)="toggle(urlinfo.id)" 
+                            [disabled]="!this.authService.canUse1" [checked]="!urlinfo.mute">
+                    </div>
                   </div>
-                </td>
-                <td class="text-center">{{urlinfo.displayName}}</td>
+                </td>                              
+                <td>{{urlinfo.displayName}}</td>
                 <td>{{urlinfo.url}}</td>
-                <td class="text-center">
+                <td class="text-center align-middle">
                   @if (urlinfo.healthy == null || urlinfo.mute) {
                     <i class="bi bi-circle-fill" [ngStyle]="{ color: 'gray' }"></i>
                   }
@@ -112,8 +114,8 @@
       <div class="mt-2 actions-buttons" [hidden]="!this.authService.canUse1">
         <button class="btn btn-sm edit-btn btn-primary tooltips" data-original-title="Edit" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#editModal" (click)="openEditModalOuter()"><i class="bi bi-pencil"></i></button>
         <button class="btn btn-sm emails-btn btn-secondary tooltips" data-original-title="Emails" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#editEmailsModal" (click)="openModalOuter()"><i class="bi bi-envelope"></i></button>
-        <button class="btn btn-sm delete-btn btn-secondary tooltips" data-original-title="Delete" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="openModalOuter()"><i class="bi bi-x-lg"></i></button>
-        <button class="btn btn-sm healthcheck-btn btn-primary tooltips" data-original-title="PerformNow" [disabled]="this.selectedUrlInfo === null" (click)="performHealthCheckNowOuter()"><i class="bi bi-bandaid"></i></button>
+        <button class="btn btn-sm delete-btn btn-secondary tooltips red-background" data-original-title="Delete" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="openModalOuter()"><i class="bi bi-x-lg"></i></button>
+        <button class="btn btn-sm healthcheck-btn btn-primary tooltips" data-original-title="PerformNow" [disabled]="this.selectedUrlInfo === null || this.selectedUrlInfo.mute" (click)="performHealthCheckNowOuter()"><i class="bi bi-bandaid"></i></button>
       </div>
     </section>
   }

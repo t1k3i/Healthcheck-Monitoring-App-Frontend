@@ -29,8 +29,8 @@
                               <small class="text-muted">{{user.firstName}} {{user.lastName}} ({{user.role.name}})</small>
                           </div>
                           <button (click)="onDeleteClick(user.id)" class="btn btn-primary btn-sm editUsersEmails"
-                          [ngStyle]="{'background-color': confirmingUserId === user.id ? 'red' : ''}">
-                          {{ confirmingUserId === user.id ? 'Confirm' : 'Delete' }}</button>
+                          [ngStyle]="{'background-color': confirmingUserId === user.id ? '#b52600' : ''}">
+                          {{ confirmingUserId === user.id ? 'CONFIRM' : 'DELETE' }}</button>
                       </div>
                   </div>
               }

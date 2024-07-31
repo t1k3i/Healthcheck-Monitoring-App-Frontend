@@ -44,11 +44,6 @@ body {
     margin-bottom: 25px;
 }
 
-.my-form label {
-    margin-bottom: 2px;
-    font-size: small;
-}
-
 .delete-button {
     border-radius: 0%;
 }
@@ -72,4 +67,10 @@ body {
     border-top-color: #004EA8;
     border-bottom-color: #004EA8;
     border-left-color: #004EA8;
+}
+
+/* RED BACKGROUND */
+
+.red-background {
+    background-color: #b52600;
 }

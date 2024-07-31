@@ -10,38 +10,44 @@
           <div class="my-form">
             <form id="add-item-form" [formGroup]="urlForm" autocomplete="off">
               <p class="invalid-input mt-3"><span>{{this.err}}</span></p>
-              <div class="form-group input-modals">
-                <label for="item-name">Name</label>
-                <input type="text" class="form-control form-control-sm modal-forms" id="item-name" placeholder="Enter name" formControlName="displayName">
+              <div class="form-group row input-modals">
+                <label for="item-name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm modal-forms" id="item-name" placeholder="Enter name" formControlName="displayName">
+                  @if (urlForm.controls["displayName"].invalid && (urlForm.controls["displayName"].touched || urlForm.controls["displayName"].dirty)) {
+                    <p class="invalid-input mt-1">
+                        <span>Enter valid name</span>
+                    </p>
+                  }
+                </div>
               </div>
-              @if (urlForm.controls["displayName"].invalid && (urlForm.controls["displayName"].touched || urlForm.controls["displayName"].dirty)) {
-                <p class="invalid-input">
-                    <span>Enter valid name</span>
-                </p>
-              }
-              <div class="form-group input-modals">
-                <label for="item-url">URL</label>
-                <input type="url" class="form-control form-control-sm modal-forms" id="item-url" placeholder="Enter URL" formControlName="url">
+              <div class="form-group row input-modals">
+                <label for="item-url" class="col-sm-2 col-form-label">URL</label>
+                <div class="col-sm-10">
+                  <input type="url" class="form-control form-control-sm modal-forms" id="item-url" placeholder="Enter URL" formControlName="url">
+                  @if (urlForm.controls["url"].invalid && (urlForm.controls["url"].touched || urlForm.controls["url"].dirty)) {
+                    <p class="invalid-input mt-1">
+                        <span>Enter valid url</span>
+                    </p>
+                  }
+                </div>
               </div>
-              @if (urlForm.controls["url"].invalid && (urlForm.controls["url"].touched || urlForm.controls["url"].dirty)) {
-                <p class="invalid-input">
-                    <span>Enter valid url</span>
-                </p>
-              }
-              <div class="form-group input-modals">
-                <label for="item-frequency">Frequency (minutes)</label>
-                <input type="number" class="form-control form-control-sm add-form-control modal-forms" id="item-frequency" placeholder="Enter frequency" formControlName="frequency">
+              <div class="form-group row input-modals">
+                <label for="item-frequency" class="col-sm-2 col-form-label">Frequency</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control form-control-sm add-form-control modal-forms" id="item-frequency" placeholder="Enter frequency (min)" formControlName="frequency">
+                  @if (urlForm.controls["frequency"].invalid && (urlForm.controls["frequency"].touched || urlForm.controls["frequency"].dirty)) {
+                    <p class="invalid-input mt-1">
+                        <span>Enter valid frequency</span>
+                    </p>
+                  }
+                </div>
               </div>
-              @if (urlForm.controls["frequency"].invalid && (urlForm.controls["frequency"].touched || urlForm.controls["frequency"].dirty)) {
-                <p class="invalid-input">
-                    <span>Enter valid frequency</span>
-                </p>
-              }
             </form>
           </div>
         </div>
         <div class="centerButton">
-          <button type="submit" class="btn btn-sm btn-primary save-url submitButton" [disabled]="urlForm.invalid" form="add-item-form" (click)="add()">Save url</button>
+          <button type="submit" class="btn btn-sm btn-primary submitButton" [disabled]="urlForm.invalid" form="add-item-form" (click)="add()">SAVE URL</button>
         </div>
       </div>
     </div>
