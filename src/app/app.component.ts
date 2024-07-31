@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UrlinfoService } from './services/urlinfo.service';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,7 @@ import { EmailsComponent } from './modals/emails/emails.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   title = 'healthcheck-app';
 
@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   private sort: boolean = true;
 
   selectedUrlInfo: UrlinfoGet | null = null;
+  private selectedUrlId: number | null = null;
 
   loading = true;
 
@@ -59,7 +60,6 @@ export class AppComponent implements OnInit {
     this.getUrlInfos();
     this.eventSubscription = this.eventService.event$.subscribe(() => {
       this.getUrlInfos();
-      this.selectedUrlInfo = null;
     });
     document.addEventListener('click', this.onDocumentClick.bind(this));
   }
@@ -84,6 +84,7 @@ export class AppComponent implements OnInit {
       (response: UrlinfoGet[]) => {
         this.urlinfos = response;
         this.loading = false;
+        this.reselectRow();  // Reselect row after data is fetched
       }, 
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -149,16 +150,21 @@ export class AppComponent implements OnInit {
   onDocumentClick(event: MouseEvent) {
     const targetElement = event.target as HTMLElement;
 
-    // Check if the clicked element is outside the table
-    if (!targetElement.closest('table')) {
+    if (!targetElement.closest('table') && !targetElement.closest('.actions-buttons') && !targetElement.closest('.modal') && !targetElement.closest('.form-switch')) {
       this.selectedUrlInfo = null;
+      this.selectedUrlId = null;
     }
   }
 
   selectRow(urlinfo: UrlinfoGet, event: MouseEvent) {
     event.stopPropagation();
     this.selectedUrlInfo = urlinfo;
+    this.selectedUrlId = urlinfo.id;
   }
 
-
+  reselectRow() {
+    if (this.selectedUrlId) {
+      this.selectedUrlInfo = this.urlinfos.find(urlinfo => urlinfo.id === this.selectedUrlId) || null;
+    }
+  }
 }

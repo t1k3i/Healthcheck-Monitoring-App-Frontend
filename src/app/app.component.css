@@ -142,6 +142,16 @@ table {
     background-color: red;
 }
   
+/* NO SAVED URLS */
+
+.alert-heading {
+    font-size: 1.1rem;
+}
+
+.alert p {
+    font-size: 0.9rem;
+}
+
 /* FOOTER */
 
 .custom-border {
