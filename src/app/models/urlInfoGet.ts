@@ -4,5 +4,6 @@ export interface UrlinfoGet {
     healthy: Boolean;
     id: number;
     mute: boolean;
+    lastChecked: Date;
     frequency: number;
 }

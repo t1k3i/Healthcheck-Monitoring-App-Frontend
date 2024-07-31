@@ -2,8 +2,8 @@
   <nav class="navbar">
     <div class="container">
       <div class="d-flex align-items-center">
-        <a class="navbar-brand-image" href="#"><img src="../assets/images/dinit-icon-sm-white-rgb.png" alt="Dinit logo"></a>
-        <a class="navbar-brand" href="#">HEALTHCHECK</a>
+        <a class="navbar-brand-image"><img src="../assets/images/dinit-icon-sm-white-rgb.png" alt="Dinit logo"></a>
+        <a class="navbar-brand">HEALTHCHECK</a>
       </div>
       @if (this.authService.getCurrentUser() == null) {
         <button type="button" class="btn btn-sm btn-outline-light my-2 my-sm-0" data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
@@ -77,6 +77,7 @@
                 </div>
               </th>
               <th>Last checked</th>
+              <th>Frequency</th>
             </tr>
           </thead>
           <tbody>
@@ -91,9 +92,18 @@
                 <td class="text-center">{{urlinfo.displayName}}</td>
                 <td>{{urlinfo.url}}</td>
                 <td class="text-center">
-                  <i class="bi bi-circle-fill" [ngStyle]="{'color': urlinfo.healthy ? 'green' : 'red'}"></i>
+                  @if (urlinfo.healthy == null || urlinfo.mute) {
+                    <i class="bi bi-circle-fill" [ngStyle]="{ color: 'gray' }"></i>
+                  }
+                  @else if (urlinfo.healthy) {
+                    <i class="bi bi-circle-fill" [ngStyle]="{ color: 'green' }"></i>
+                  }
+                  @else {
+                    <i class="bi bi-circle-fill" [ngStyle]="{ color: 'red' }"></i>
+                  }
                 </td>
-                <td>{{urlinfo.frequency}} min</td>
+                <td>{{ urlinfo.lastChecked ? (urlinfo.lastChecked | date: 'medium') : 'Never' }}</td>
+                <td class="text-center">{{ urlinfo.frequency }}</td>
               </tr>
             }
           </tbody>
@@ -108,11 +118,9 @@
     </section>
   }
   @else if (urlinfos.length == 0 && !this.loading) {
-    <div class="container">
-      <div class="alert alert-info" role="alert">
-        <h4 class="alert-heading">NO SAVED URLS!</h4>
-        <p>No urls were found.</p>
-      </div>
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO SAVED URLS!</h4>
+      <p>No urls were found.</p>
     </div>
   }
   @else {
