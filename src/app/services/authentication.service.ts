@@ -19,8 +19,12 @@ export class AuthenticationService {
   public canUse2: boolean = false;
 
   constructor(private http: HttpClient, private urlinfoService: UrlinfoService) {
-    this.userSubject = new BehaviorSubject<User | null>(null);
+    const storedUser = sessionStorage.getItem('currentUser');
+    this.currentUser = storedUser ? JSON.parse(storedUser) : null;
+    this.userSubject = new BehaviorSubject<User | null>(this.currentUser);
     this.user = this.userSubject.asObservable();
+
+    this.setPermissions();
   }
 
   public get userValue(): User | null {
@@ -33,8 +37,8 @@ export class AuthenticationService {
         user.authdata = window.btoa(username + ':' + password);
         this.currentUser = user;
         this.userSubject.next(user);
-        this.canUse1 = this.currentUser?.role.name === 'USER' || this.currentUser?.role.name === 'ADMIN';
-        this.canUse2 = this.currentUser?.role.name === 'ADMIN';
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        this.setPermissions();
         return user;
       }));
   }
@@ -42,6 +46,7 @@ export class AuthenticationService {
   logout(): void {
     this.currentUser = null;
     this.userSubject.next(null);
+    sessionStorage.removeItem('currentUser');
     this.canUse1 = false;
     this.canUse2 = false;
   }
@@ -66,4 +71,8 @@ export class AuthenticationService {
     return this.http.delete<void>(`${this.urlinfoService.apiServer}/users/${id}`);
   }
 
+  private setPermissions(): void {
+    this.canUse1 = this.currentUser?.role.name === 'USER' || this.currentUser?.role.name === 'ADMIN';
+    this.canUse2 = this.currentUser?.role.name === 'ADMIN';
+  }
 }
