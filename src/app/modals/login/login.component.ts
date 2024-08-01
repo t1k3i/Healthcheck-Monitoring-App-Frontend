@@ -20,11 +20,11 @@ export class LoginComponent {
 
   public onLogin(form: NgForm): void {
     this.authService.login(form.value.username, form.value.password).subscribe(
-      success => {
+      () => {
         form.resetForm();
         this.close(form);
       },
-      error => {
+      () => {
         this.authError = 'User not found';
       }
     );

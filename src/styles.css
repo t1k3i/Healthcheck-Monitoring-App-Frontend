@@ -1,6 +1,7 @@
 /* styles.css */
 body {
   font-family: 'Roboto';
+  background-color: rgb(253, 253, 253);
 }
 
 .modal-header {
@@ -73,4 +74,8 @@ body {
 
 .red-background {
     background-color: #b52600;
+}
+
+.no-emails {
+    font-size: 0.9rem;
 }

@@ -14,7 +14,7 @@
                   <input type="text" class="form-control modal-forms form-control-sm" id="add-email" formControlName="email" placeholder="Enter email">
                 </div>
                 <div class="col-md-4">
-                  <button type="submit" class="btn btn-sm btn-primary email-button" [disabled]="emailForm.invalid" (click)="addEmail()">Add</button>
+                  <button type="submit" class="btn btn-sm btn-primary email-button" [disabled]="emailForm.invalid" (click)="addEmail()">ADD</button>
                 </div>
               </div>
               @if (emailForm.controls["email"].invalid && (emailForm.controls["email"].touched)) {

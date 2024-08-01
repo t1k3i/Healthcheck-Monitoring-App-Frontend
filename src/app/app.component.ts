@@ -17,11 +17,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditusersComponent } from './modals/editusers/editusers.component';
 import { RegisterComponent } from './modals/register/register.component';
 import { EmailsComponent } from './modals/emails/emails.component';
+import { HistoryComponent } from "./modals/history/history.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule, EditusersComponent, RegisterComponent, EmailsComponent],
+  imports: [RouterOutlet, CommonModule, FormsModule, LoginComponent, AddComponent, DeleteComponent, EditComponent, ReactiveFormsModule, EditusersComponent, RegisterComponent, EmailsComponent, HistoryComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

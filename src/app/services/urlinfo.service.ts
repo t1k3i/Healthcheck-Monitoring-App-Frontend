@@ -6,6 +6,7 @@ import { UrlinfoAdd } from '../models/urlInfoAdd';
 import { UrlinfoUpdate } from '../models/urlInfoUpdate';
 import { EmailAdd } from '../models/emailAdd';
 import { Email } from '../models/email';
+import { HistoryInfo } from '../models/historyInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,14 @@ export class UrlinfoService {
 
   public performHealthcheckNow(urlinfoId: number): Observable<any> {
     return this.http.put<any>(`${this.apiServer}/urls/healthcheck/${urlinfoId}`, {});
+  }
+
+  public getHistory(urlinfoId: number): Observable<HistoryInfo[]> {
+    return this.http.get<HistoryInfo[]>(`${this.apiServer}/history/${urlinfoId}`);
+  }
+
+  public deleteHistory(urlinfoId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServer}/history/${urlinfoId}`);
   }
 
 }

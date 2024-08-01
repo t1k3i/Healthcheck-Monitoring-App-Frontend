@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="col-sm-4 d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1" [hidden]="!this.authService.canUse1">ADD URL</button>
+        <button class="btn btn-sm btn-primary btn-blue add-urls" type="button" data-bs-toggle="modal" data-bs-target="#add-form" [disabled]="!this.authService.canUse1" [hidden]="!this.authService.canUse1">ADD URL</button>
       </div>
     </div>
   </section>
@@ -120,8 +120,8 @@
       </div>
       <div class="mt-2 actions-buttons" [hidden]="!this.authService.canUse1">
         <button class="btn btn-sm btn-blue btn-primary tooltips" data-original-title="Edit" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#editModal" (click)="openEditModalOuter()" data-toggle="tooltip" data-placement="bottom" title="Edit url"><i class="bi bi-pencil"></i></button>
-        <button class="btn btn-sm emails-btn btn-secondary tooltips" data-original-title="Emails" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#editEmailsModal" (click)="openModalOuter()"><i class="bi bi-envelope" data-toggle="tooltip" data-placement="bottom" title="Edit alert emails"></i></button>
-        <button class="btn btn-sm btn-blue btn-primary tooltips" data-original-title="History" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#historyModal" data-toggle="tooltip" data-placement="bottom" title="History"><i class="bi bi-clock-history"></i></button>
+        <button class="btn btn-sm emails-btn btn-secondary tooltips" data-original-title="Emails" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#editEmailsModal" (click)="openModalOuter()" data-toggle="tooltip" data-placement="bottom" title="Edit alert emails"><i class="bi bi-envelope"></i></button>
+        <button class="btn btn-sm btn-blue btn-primary tooltips" data-original-title="History" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#history-modal" (click)="openModalOuter()" data-toggle="tooltip" data-placement="bottom" title="History"><i class="bi bi-clock-history"></i></button>
         <button class="btn btn-sm red-background btn-danger tooltips red-background" data-original-title="Delete" [disabled]="this.selectedUrlInfo === null" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="openModalOuter()" data-toggle="tooltip" data-placement="bottom" title="Delete url"><i class="bi bi-x-lg"></i></button>
         <button class="btn btn-sm btn-blue btn-primary tooltips" data-original-title="PerformNow" [disabled]="this.selectedUrlInfo === null || this.selectedUrlInfo.mute" (click)="performHealthCheckNowOuter()" data-toggle="tooltip" data-placement="bottom" title="Perform healthckeck now"><i class="bi bi-bandaid"></i></button>
       </div>
@@ -158,3 +158,4 @@
 <app-emails [inputFromParent]="idToDelete"></app-emails>
 <app-register></app-register>
 <app-editusers></app-editusers>
+<app-history [inputFromParent]="idToDelete"></app-history>
