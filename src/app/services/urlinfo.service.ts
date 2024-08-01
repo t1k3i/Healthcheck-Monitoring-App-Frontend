@@ -13,7 +13,7 @@ import { HistoryInfo } from '../models/historyInfo';
 })
 export class UrlinfoService {
 
-  apiServer = 'http://localhost:8080';
+  apiServer = 'https://healthcheckmonitorapp.azurewebsites.net';
 
   constructor(private http: HttpClient) { }
 
