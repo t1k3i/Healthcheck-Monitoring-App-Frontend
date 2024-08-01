@@ -105,16 +105,21 @@ main section {
 thead th {
     text-align: center;
     vertical-align: middle;
-    position: sticky;
     top: 0;
-    background-color: #80abd3;
     z-index: 1;
+    font-weight: 500;
+    position: sticky;
+}
+
+thead {
+    border-bottom: #333;
+    border-bottom: 3px;
 }
 
 th .btn {
     font-size: 0.9rem;
     color: inherit;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 th i {
@@ -134,12 +139,24 @@ table {
     border-radius: 0%;
 }
 
-.edit-btn {
+.actions-buttons {
+    display: inline-block;
+}
+
+.btn-blue {
     background-color: #004EA8;
 }
 
-.delete-btn {
-    background-color: red;
+.btn-blue:hover {
+    background-color: #3378b8;
+}
+
+.emails-btn {
+    background-color: #62737e;
+}
+
+.emails-btn:hover {
+    background-color: #818f97;
 }
   
 /* NO SAVED URLS */
