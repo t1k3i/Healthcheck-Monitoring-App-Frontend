@@ -30,8 +30,6 @@
     background-color: #004EA8;
     color: white;
     border: none;
-    margin: -20px;
-    margin-right: 2px;
 }
 
 .dropdown .btn:hover {
@@ -95,6 +93,16 @@ main section {
     position: relative;
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+@media (max-width: 320px) {
+    .table-container {
+        max-height: 59vh;
+    }
+
+    .dropdown-menu {
+        margin-left: 0.5rem;
+    }
 }
 
 /* For WebKit browsers (Chrome, Safari, etc.) */
@@ -171,10 +179,18 @@ table {
     font-size: 0.9rem;
 }
 
+.alert {
+    background-color: #c1ebfa;
+}
+
 /* FOOTER */
 
 .custom-border {
     border-top: 1px solid #333;
+}
+
+footer {
+    font-size: 0.9rem;
 }
 
 .center-spinner {

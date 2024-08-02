@@ -43,9 +43,6 @@ export class EditusersComponent implements AfterViewInit {
       (response: User[]) => {
         this.users = response;
         this.loading = false;
-      },
-      () => {
-        this.loading = false;
       }
     )
   }

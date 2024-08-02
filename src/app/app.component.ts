@@ -35,13 +35,14 @@ export class AppComponent implements OnInit, OnDestroy {
   searchControl: FormControl = new FormControl();
 
   public urlinfos: UrlinfoGet[] = [];
-  public idToDelete: number = -1;
-  public idToUpdate: number = -1;
+
+  public idTo: number = -1;
   public urlInfoToUpdate: UrlinfoUpdate = {
     displayName: '',
     url: '',
     frequency: 0
   };
+  
   private sort: boolean = true;
 
   selectedUrlInfo: UrlinfoGet | null = null;
@@ -85,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
       (response: UrlinfoGet[]) => {
         this.urlinfos = response;
         this.loading = false;
-        this.reselectRow();  // Reselect row after data is fetched
+        this.reselectRow();
       }, 
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public openModal(id: number): void {
-    this.idToDelete = id;
+    this.idTo = id;
   }
 
   openModalOuter(): void {
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
       url: newUrl,
       frequency: newFrequency
     }
-    this.idToUpdate = id;
+    this.openModal(id);
   }
 
   public openEditModalOuter(): void {
@@ -137,9 +138,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.urlinfoService.performHealthcheckNow(id).subscribe(
       () => {
         this.eventService.triggerEvent();
-      }, 
-      (error) => {
-        console.log("error", error);
       }
     );
   }
@@ -151,7 +149,7 @@ export class AppComponent implements OnInit, OnDestroy {
   onDocumentClick(event: MouseEvent) {
     const targetElement = event.target as HTMLElement;
 
-    if (!targetElement.closest('table') && !targetElement.closest('.actions-buttons') && !targetElement.closest('.modal') && !targetElement.closest('.form-switch')) {
+    if (!targetElement.closest('table') && !targetElement.closest('.button-group') && !targetElement.closest('.modal') && !targetElement.closest('.form-switch')) {
       this.selectedUrlInfo = null;
       this.selectedUrlId = null;
     }
@@ -162,7 +160,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.selectedUrlInfo = urlinfo;
     this.selectedUrlId = urlinfo.id;
   }
-
+  
   reselectRow() {
     if (this.selectedUrlId) {
       this.selectedUrlInfo = this.urlinfos.find(urlinfo => urlinfo.id === this.selectedUrlId) || null;
