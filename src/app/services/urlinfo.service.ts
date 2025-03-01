@@ -9,16 +9,18 @@ import { Email } from '../models/email';
 import { HistoryInfo } from '../models/historyInfo';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UrlinfoService {
+  apiServer = 'http://localhost:8080';
 
-  apiServer = 'https://healthcheckmonitorapp.azurewebsites.net';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getUrlInfos(healthyFirst: boolean = true): Observable<UrlinfoGet[]> {
-    const params = new HttpParams().set('healthyFirst', healthyFirst.toString());
+    const params = new HttpParams().set(
+      'healthyFirst',
+      healthyFirst.toString()
+    );
     return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls`, { params });
   }
 
@@ -30,12 +32,21 @@ export class UrlinfoService {
     return this.http.post<UrlinfoAdd>(`${this.apiServer}/urls`, urlinfo);
   }
 
-  public updateUrlInfo(urlinfo: UrlinfoUpdate, urlinfoId: number): Observable<UrlinfoUpdate> {
-    return this.http.put<UrlinfoUpdate>(`${this.apiServer}/urls/${urlinfoId}`, urlinfo);
+  public updateUrlInfo(
+    urlinfo: UrlinfoUpdate,
+    urlinfoId: number
+  ): Observable<UrlinfoUpdate> {
+    return this.http.put<UrlinfoUpdate>(
+      `${this.apiServer}/urls/${urlinfoId}`,
+      urlinfo
+    );
   }
 
   public updateEmail(email: EmailAdd, urlinfoId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiServer}/email/${urlinfoId}/emails`, email);
+    return this.http.put<any>(
+      `${this.apiServer}/email/${urlinfoId}/emails`,
+      email
+    );
   }
 
   public toggleMute(urlinfoId: number): Observable<any> {
@@ -51,27 +62,37 @@ export class UrlinfoService {
   }
 
   public searchUrlInfos(param: string): Observable<UrlinfoGet[]> {
-    return this.http.get<UrlinfoGet[]>(`${this.apiServer}/urls/search?query=${encodeURIComponent(param)}`);
+    return this.http.get<UrlinfoGet[]>(
+      `${this.apiServer}/urls/search?query=${encodeURIComponent(param)}`
+    );
   }
 
   public getEmails(urlinfoId: number): Observable<Email[]> {
-    return this.http.get<Email[]>(`${this.apiServer}/email/${urlinfoId}/emails`);
+    return this.http.get<Email[]>(
+      `${this.apiServer}/email/${urlinfoId}/emails`
+    );
   }
 
   public deleteEmail(urlinfoId: number, emailId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServer}/email/${urlinfoId}/emails/${emailId}`);
+    return this.http.delete<void>(
+      `${this.apiServer}/email/${urlinfoId}/emails/${emailId}`
+    );
   }
 
   public performHealthcheckNow(urlinfoId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiServer}/urls/healthcheck/${urlinfoId}`, {});
+    return this.http.put<any>(
+      `${this.apiServer}/urls/healthcheck/${urlinfoId}`,
+      {}
+    );
   }
 
   public getHistory(urlinfoId: number): Observable<HistoryInfo[]> {
-    return this.http.get<HistoryInfo[]>(`${this.apiServer}/history/${urlinfoId}`);
+    return this.http.get<HistoryInfo[]>(
+      `${this.apiServer}/history/${urlinfoId}`
+    );
   }
 
   public deleteHistory(urlinfoId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServer}/history/${urlinfoId}`);
   }
-
 }

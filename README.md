@@ -1,27 +1,51 @@
 # HealthcheckApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+The **Healthcheck Monitoring App (Frontend)** is the web-based interface for monitoring the health status of various services. Built with **Angular**, this application provides an intuitive dashboard for users to track service statuses, manage monitored services, and perform different actions on a specific service.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Dashboard Overview**: Displays the status of all monitored services.
+- **Service Management**: Allows authenticated users to add, edit, or remove monitored services.
+- **Healthcheck Analysis**: Dispalys history of past health check results.
+- **Authentication & Authorization**: Secure login system for managing services.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-## Code scaffolding
+## Main Page
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The main dashboard provides a summary of all services being monitored, showing their health status in a table format. Selecting a service reveals additional actions at the bottom of the page, such as viewing logs, editing details, or removing the service.
 
-## Build
+### Screenshot
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Main Dashboard](assets/main-page.png)
 
-## Running unit tests
+## User Management
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The application features a secure authentication system. Only admin users can register new users, ensuring controlled access to the platform.
 
-## Running end-to-end tests
+- **Login Page**: Users can log in securely.
+- **Register Page**: Admins can create new user accounts.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Screenshots
 
-## Further help
+![Login Page](assets/login.png)
+![Register Page](assets/register.png)
+![User Management](assets/edit-users.png)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Service Management
+
+Users can add new services or edit existing ones.
+
+### Screenshots
+
+![Add Service Modal](assets/add-service.png)
+![Edit Service Modal](assets/edit-service.png)
+
+## Alert Email & History
+
+- **Alert Email Modal**: Users can edit the list of email recipients for service alerts.
+- **History Modal**: Displays past health check results.
+
+### Screenshots
+
+![Edit Alert Emails Modal](assets/alert-emails.png)
+![View History Modal](assets/history.png)
